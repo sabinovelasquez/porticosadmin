@@ -1,0 +1,30 @@
+section#events
+  h1 Eventos
+  .row
+    .col-sm-4
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  Nuevo Evento
+        .panel-body
+          a.btn.btn-success
+            | Crear evento  
+            i.fa.fa-plus
+    .col-sm-4(ng-repeat='i in [0,1,2,3,4]')
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  Nombre de Evento
+          a.btn.btn-warning.pull-right
+            | Editar  
+            i.fa.fa-pencil
+        .panel-body
+          .content
+            i.fa.fa-calendar
+            |  Días: 6
+          .content
+            i.fa.fa-tablet
+            |  Dispositivos: 2
+          .content
+            i.fa.fa-qrcode
+            |  Asistentes: 232

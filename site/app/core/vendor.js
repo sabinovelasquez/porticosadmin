@@ -14,7 +14,6 @@ module.exports = () => {
   require('ngtouch');
   require('ng-parallax');
   require('font-awesome-webpack');
-  require('../../bower_components/ngmap/build/scripts/ng-map.min.js');
 
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');

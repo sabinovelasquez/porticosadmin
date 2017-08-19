@@ -9,7 +9,6 @@ const ngModule = angular.module('app', [
   'ngTouch',
   'ui.bootstrap',
   'ui.router',
-  'ngMap',
 ]);
 
 require('./config')(ngModule);

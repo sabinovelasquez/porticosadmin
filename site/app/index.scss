@@ -3,24 +3,41 @@
 @import './core/css/common';
 @import './core/css/logo';
 
-// @import url(https://fonts.googleapis.com/css?family=Cinzel:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500);
 
-body, html{
+body,
+html{
+  font-family: 'Montserrat', sans-serif;
   height: 100%;
 }
+h1,
+h2{
+  font-weight: 300;
+  text-transform: uppercase;
+}
+section{
+  width: 90%;
+  margin: auto;
+}
+.red{
+  color: $red;
+}
+.green{
+  color: $green;
+}
+.glyphicon{
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  display: inline-block;
 
-.glyphicon {
-    display: inline-block;
-    font-family: 'FontAwesome';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.glyphicon-chevron-left:before {
-  content: "\f053";
+.glyphicon-chevron-left:before{
+  content: '\f053';
 }
-.glyphicon-chevron-right:before {
-  content: "\f054";
+.glyphicon-chevron-right:before{
+  content: '\f054';
 }
