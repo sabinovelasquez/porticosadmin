@@ -1,0 +1,17 @@
+@import '../../css/functions';
+@import '../../css/colors';
+
+#new-event{
+  form{
+    .form-check{
+      .form-check-label{
+        span{
+          margin-left: 10px;
+        }
+      }
+    }
+    button{
+      margin-top: 10px;
+    }
+  }
+}

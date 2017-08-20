@@ -14,7 +14,8 @@ module.exports = () => {
   require('ngtouch');
   require('ng-parallax');
   require('font-awesome-webpack');
-
+  require('firebase');
+  require('angularfire');
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');
 };

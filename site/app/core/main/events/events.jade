@@ -7,24 +7,29 @@ section#events
           i.fa.fa-building
           |  Nuevo Evento
         .panel-body
-          a.btn.btn-success
+          a.btn.btn-success(ui-sref='new-event')
             | Crear evento  
             i.fa.fa-plus
-    .col-sm-4(ng-repeat='i in [0,1,2,3,4]')
+    .col-sm-4.loading(ng-if='!events.events')
+      i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+    .col-sm-4(ng-repeat='event in events.events')
       .panel.panel-default
         .panel-heading
           i.fa.fa-building
-          |  Nombre de Evento
+          |  {{event.title}}
           a.btn.btn-warning.pull-right
             | Editar  
             i.fa.fa-pencil
         .panel-body
           .content
             i.fa.fa-calendar
-            |  Días: 6
+            |  Días: -
           .content
             i.fa.fa-tablet
-            |  Dispositivos: 2
+            |  Dispositivos:  
+            span(ng-if='!event.devices && event.devices!=0')
+              i.fa.fa-spinner.fa-pulse
+            {{event.devices}}
           .content
             i.fa.fa-qrcode
-            |  Asistentes: 232
+            |  Asistentes: -

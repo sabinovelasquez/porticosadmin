@@ -2,6 +2,10 @@
 @import '../../css/colors';
 
 #events{
+  .loading{
+    color: $green;
+    text-align: center;
+  }
   .panel-heading{
     a{
       font-size: 12px;
