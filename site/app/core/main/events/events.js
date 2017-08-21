@@ -6,6 +6,7 @@ export default ngModule => {
       scope: {},
       controllerAs: 'events',
       controller: function eventsCtrl() {
+        this.showArchived = false;
         firebaseAPIService.getEvents().then( (data) => {
           this.events = data;
           this.update();

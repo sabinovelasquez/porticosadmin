@@ -4,7 +4,7 @@ export default ngModule => {
       this.devices = data;
     });
     this.submit = () => {
-      firebaseAPIService.newEvent({title: this.form.title}).then( (data) => {
+      firebaseAPIService.newEvent({title: this.form.title, archived: false}).then( (data) => {
         this.configDevices(data.key);
       });
     };

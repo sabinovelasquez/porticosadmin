@@ -18,6 +18,14 @@ export default ngModule => {
         const events = $firebaseObject(ref);
         return events.$loaded();
       },
+      archiveEvent: (eventKey, bol) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const setEvent = $firebaseObject(ref);
+        setEvent.$loaded().then(() => {
+          setEvent.archived = bol;
+          return setEvent.$save();
+        });
+      },
       getEvent: (eventKey) => {
         const ref = firebaseClient.child(`events/${eventKey}`);
         const events = $firebaseObject(ref);

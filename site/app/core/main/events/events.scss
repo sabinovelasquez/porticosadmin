@@ -2,9 +2,20 @@
 @import '../../css/colors';
 
 #events{
+  .show{
+    text-align: right;
+    i{
+      font-size: 22px;
+    }
+  }
   .loading{
     color: $green;
     text-align: center;
+  }
+  .panel{
+    &.grey{
+      opacity: .5;
+    }
   }
   .panel-heading{
     a{
