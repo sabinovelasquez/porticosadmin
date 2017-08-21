@@ -1,0 +1,49 @@
+nav-bar
+section#view-event
+  h1
+    .loading(ng-if='!viewEvent.event.title')
+      i.fa.fa-spinner.fa-pulse
+    {{viewEvent.event.title}}
+  a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento')
+    i.fa.fa-pencil-square-o
+  .devices
+    .loading(ng-if='!viewEvent.devices')
+      i.fa.fa-spinner.fa-pulse
+    .device(ng-repeat='(key, device) in viewEvent.devices')
+      i.fa.fa-tablet
+      {{key | limitTo: -4}}
+  .registers
+    table.table.table-hover.table-bordered
+      thead
+        tr
+          th
+          th(colspan=2)
+            .i.fa.fa-calendar
+            |  Día 1
+          th
+          th
+        tr
+          th 
+            .i.fa.fa-qrcode
+            |  Código
+          th 
+            .i.fa.fa-clock-o
+            |  Hora
+          th
+            .i.fa.fa-percent
+            |  Asistencia
+          th
+            .i.fa.fa-clock-o
+            |  Total
+          th
+            .i.fa.fa-certificate
+            |  Aprov / Rech
+      tbody
+        tr(ng-repeat='user in viewEvent.event.registers')
+          td {{user.code}}
+          td {{user.event}}
+          td {{user.date}}
+          td {{user.where}}
+          td {{user.hour}}
+
+    p(ng-show='!device.registers') No hay registros para este dispositivo.

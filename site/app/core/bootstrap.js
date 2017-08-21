@@ -9,6 +9,7 @@ const ngModule = angular.module('app', [
   'ui.bootstrap',
   'ui.router',
   'firebase',
+  'ngCsv',
 ]);
 
 require('./config')(ngModule);

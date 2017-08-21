@@ -21,9 +21,10 @@ section#events
         .panel-heading
           i.fa.fa-building
           |  {{event.title}}
-          a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})')
-            | Editar  
-            i.fa.fa-pencil
+          a.btn.btn-warning.pull-right(ui-sref='view-event({key:key})', tooltip-placement='left', uib-tooltip='Ver registros del Evento') 
+            i.fa.fa-table
+          a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})', tooltip-placement='left', uib-tooltip='Editar Evento')
+            i.fa.fa-pencil-square-o
         .panel-body
           .content
             i.fa.fa-calendar
