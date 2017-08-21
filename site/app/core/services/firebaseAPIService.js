@@ -6,17 +6,17 @@ export default ngModule => {
       getDevices: () => {
         const ref = firebaseClient.child('devices');
         const devices = $firebaseObject(ref);
-        return devices;
+        return devices.$loaded();
       },
       getEventDevices: (eventKey) => {
         const ref = firebaseClient.child(`devices`).orderByChild('settings/eventKey').equalTo(eventKey);
         const devices = $firebaseArray(ref);
-        return devices;
+        return devices.$loaded();
       },
       getEvents: () => {
         const ref = firebaseClient.child('events');
         const events = $firebaseObject(ref);
-        return events;
+        return events.$loaded();
       },
       newEvent: (event) => {
         const ref = firebaseClient.child('events');

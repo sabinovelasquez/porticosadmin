@@ -1,6 +1,6 @@
 export default ngModule => {
-  ngModule.controller('NewEventCtrl', function NewEventCtrl(firebaseAPIService) {
-    firebaseAPIService.getDevices().$loaded().then( (data) => {
+  ngModule.controller('NewEventCtrl', function NewEventCtrl(firebaseAPIService, $state) {
+    firebaseAPIService.getDevices().then( (data) => {
       this.devices = data;
     });
     this.submit = () => {
@@ -15,6 +15,7 @@ export default ngModule => {
           firebaseAPIService.setDevice(deviceId, eventKey);
         });
       }
+      $state.go('main');
     };
   });
 };
