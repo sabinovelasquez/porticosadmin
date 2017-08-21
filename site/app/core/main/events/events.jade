@@ -12,12 +12,12 @@ section#events
             i.fa.fa-plus
     .col-sm-4.loading(ng-if='!events.events')
       i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
-    .col-sm-4(ng-repeat='event in events.events')
+    .col-sm-4(ng-repeat='(key, event) in events.events')
       .panel.panel-default
         .panel-heading
           i.fa.fa-building
           |  {{event.title}}
-          a.btn.btn-warning.pull-right
+          a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})')
             | Editar  
             i.fa.fa-pencil
         .panel-body

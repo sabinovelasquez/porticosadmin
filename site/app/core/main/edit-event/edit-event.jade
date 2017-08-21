@@ -1,0 +1,24 @@
+nav-bar
+section#edit-event
+  h1 Editar Evento
+  form.form-group(ng-submit='editEvent.submit()', ng-model='editEvent.form')
+    .col-sm-6
+      label Editar nombre del Evento
+      .input-group
+        span.input-group-addon
+          i.fa.fa-building
+        input.form-control(type='text', placeholder='Ingrese nombre del Evento', ng-model='editEvent.event.title')
+    .col-sm-6
+      label Asignar tablets
+      .loading(ng-if='!editEvent.devices')
+        i.fa.fa-spinner.fa-pulse
+      .form-check(ng-repeat='(key, device) in editEvent.devices track by $index')
+        label.form-check-label
+          input.form-check-input(type='checkbox', ng-model='editEvent.form.devices[key]')
+          span
+            i.fa.fa-tablet
+            |   {{key | limitTo: -4}}
+    .col-sm-12
+      button.btn.btn-success(ng-disabled='!editEvent.event.title')
+        | Enviar  
+        i.fa.fa-send
