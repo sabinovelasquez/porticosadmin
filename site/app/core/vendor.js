@@ -6,7 +6,6 @@ module.exports = () => {
 
   require('angular');
   require('angular-animate');
-  require('angular-module-resource');
   require('angular-sanitize');
   require('angular-scroll');
   require('angular-ui-router');
