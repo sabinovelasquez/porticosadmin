@@ -28,11 +28,32 @@ section#new-event.container
             |   {{key | limitTo: -4}}
     hr
     .col-sm-4
-      .thumbnail
-        .caption
-          p
-            .bloque(uib-timepicker, ng-model='newEvent.form.bloques[0]', hour-step='1', minute-step='1', show-meridian='false')
-            .bloque(uib-timepicker, ng-model='newEvent.form.blocks[1]', hour-step='1', minute-step='1', show-meridian='false')
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  Día
+        .panel-body
+          .row
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Inicio:
+              select.form-control
+                option(ng-repeat='hour in newEvent.hours') {{hour}}
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Término:
+              select.form-control
+                option(value='1') 00:00
+            .col-sm-12
+              a.btn.btn-success(ui-sref='new-event')
+                | Agregar Bloque 
+                i.fa.fa-plus
+        .panel-footer
+          a.btn.btn-warning(ui-sref='new-event')
+            | Grabar 
+            i.fa.fa-save
     .col-sm-12
       .icon
         button.btn.btn-success(ng-disabled='!newEvent.form.title || !newEvent.form.percent')
