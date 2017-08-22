@@ -26,7 +26,13 @@ section#new-event.container
           span
             i.fa.fa-tablet
             |   {{key | limitTo: -4}}
-    
+    hr
+    .col-sm-4
+      .thumbnail
+        .caption
+          p
+            .bloque(uib-timepicker, ng-model='newEvent.form.bloques[0]', hour-step='1', minute-step='1', show-meridian='false')
+            .bloque(uib-timepicker, ng-model='newEvent.form.blocks[1]', hour-step='1', minute-step='1', show-meridian='false')
     .col-sm-12
       .icon
         button.btn.btn-success(ng-disabled='!newEvent.form.title || !newEvent.form.percent')
