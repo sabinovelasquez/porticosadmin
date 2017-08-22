@@ -1,5 +1,5 @@
 export default ngModule => {
-  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(firebaseAPIService, $stateParams, $state) {
+  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(firebaseAPIService, $stateParams) {
     this.eventKey = $stateParams.key;
     this.devices = {};
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {

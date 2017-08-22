@@ -5,7 +5,7 @@ section#events
     i.fa(ng-class='{"fa-toggle-on green":events.showArchived, "fa-toggle-off":!events.showArchived}')
   h1 Eventos
   .row
-    .col-sm-4
+    .col-sm-6.col-lg-4
       .panel.panel-default
         .panel-heading
           i.fa.fa-building
@@ -14,9 +14,9 @@ section#events
           a.btn.btn-success(ui-sref='new-event')
             | Crear evento  
             i.fa.fa-plus
-    .col-sm-4.loading(ng-if='!events.events')
+    .col-sm-6.col-lg-4.loading(ng-if='!events.events')
       i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
-    .col-sm-4(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
+    .col-sm-6.col-lg-4(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
       .panel.panel-default(ng-class='{"grey":event.archived}')
         .panel-heading
           i.fa.fa-building
@@ -35,6 +35,12 @@ section#events
             span(ng-if='!event.devices && event.devices!=0')
               i.fa.fa-spinner.fa-pulse
             {{event.devices}}
+          .content
+            i.fa.fa-certificate
+            |  Certificación:  
+            span(ng-if='!event.percent && event.percent!=0')
+              i.fa.fa-spinner.fa-pulse
+            {{event.percent}}%
           .content
             i.fa.fa-qrcode
             |  Asistentes:  

@@ -1,34 +1,45 @@
 nav-bar
-section#edit-event
+section#edit-event.container
   h1 Editar Evento
   form.form-group(ng-submit='editEvent.submit()', ng-model='editEvent.form')
-    .col-sm-6
+    .col-sm-8
       label Editar nombre del Evento
       .input-group
         span.input-group-addon
           i.fa.fa-building
         input.form-control(type='text', placeholder='Ingrese nombre del Evento', ng-model='editEvent.event.title')
-    .col-sm-6
-      label Asignar tablets
+    .col-sm-4
+      label Porcentaje requerido para Certificación
+      .input-group
+        span.input-group-addon
+          i.fa.fa-percent
+        input.form-control(type='number', placeholder='Ingrese %', ng-model='editEvent.event.percent')
+    hr
+    .col-sm-12
+      .checker
+        label Asignar tablets:
       .loading(ng-if='!editEvent.devices')
         i.fa.fa-spinner.fa-pulse
-      .form-check(ng-repeat='(key, device) in editEvent.devices track by $index')
+      .checker(ng-repeat='(key, device) in editEvent.devices track by $index')
         label.form-check-label
           input.form-check-input(type='checkbox', ng-model='editEvent.form.devices[key]', ng-checked='device.checked')
           span
             i.fa.fa-tablet
             |   {{key | limitTo: -4}}
     .col-sm-12
-      .row
-        .col-sm-3.col-xs-6
-          button.btn.btn-success(ng-disabled='!editEvent.event.title')
-            | Modificar Evento  
-            i.fa.fa-send
-        .col-sm-3.col-xs-6(ng-if='!editEvent.event.archived && editEvent.event.title')
-          button.btn.btn-danger(ng-click='editEvent.archive(true)')
-            | Archivar Evento  
-            i.fa.fa-archive
-        .col-sm-3.col-xs-6(ng-if='editEvent.event.archived && editEvent.event.title')
-          button.btn.btn-primary(ng-click='editEvent.archive(false)')
-            | Restaurar Evento  
-            i.fa.fa-archive
+      .icon
+        button.btn.btn-success(ng-disabled='!editEvent.event.title')
+          | Modificar Evento  
+          i.fa.fa-send
+      .icon(ng-if='!editEvent.event.archived && editEvent.event.title')
+        button.btn.btn-danger(ng-click='editEvent.archive(true)')
+          | Archivar Evento  
+          i.fa.fa-archive
+      .icon(ng-if='editEvent.event.archived && editEvent.event.title')
+        button.btn.btn-primary(ng-click='editEvent.archive(false)')
+          | Restaurar Evento  
+          i.fa.fa-archive
+      .icon
+        button.btn.btn-default(ui-sref='main')
+          | Cancelar  
+          i.fa.fa-ban

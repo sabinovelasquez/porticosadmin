@@ -20,14 +20,14 @@ export default ngModule => {
       $state.go('main');
     };
     this.submit = () => {
-      firebaseAPIService.setEventTitle(this.event.title, this.eventKey);
+      firebaseAPIService.setEventData(this.event.title, this.eventKey, this.event.percent);
       if (this.form.devices) {
         const devices = Object.keys(this.form.devices);
         angular.forEach(devices, (deviceId) => {
           firebaseAPIService.setDevice(deviceId, this.eventKey);
         });
       }
-      $state.go('main');
+      $state.go('view-event', {key: this.eventKey});
     };
   });
 };

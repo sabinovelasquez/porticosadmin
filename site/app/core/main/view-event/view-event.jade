@@ -4,8 +4,11 @@ section#view-event
     .loading(ng-if='!viewEvent.event.title')
       i.fa.fa-spinner.fa-pulse
     {{viewEvent.event.title}}
-  a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento')
-    i.fa.fa-pencil-square-o
+  .details
+    a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento')
+      i.fa.fa-pencil-square-o
+    a.btn.btn-default(ui-sref='main', tooltip-placement='right', uib-tooltip='Ver todos los Eventos')
+      i.fa.fa-home
   .devices
     .loading(ng-if='!viewEvent.devices')
       i.fa.fa-spinner.fa-pulse

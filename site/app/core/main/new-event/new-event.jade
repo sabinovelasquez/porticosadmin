@@ -1,24 +1,38 @@
 nav-bar
-section#new-event
+section#new-event.container
   h1 Nuevo Evento
   form.form-group(ng-submit='newEvent.submit()', ng-model='newEvent.form')
-    .col-sm-6
+    .col-sm-8
       label Nombre del Evento
       .input-group
         span.input-group-addon
           i.fa.fa-building
         input.form-control(type='text', placeholder='Ingrese nombre del Evento', ng-model='newEvent.form.title')
-    .col-sm-6
-      label Tablets asociados
+    .col-sm-4
+      label Porcentaje requerido para Certificación
+      .input-group
+        span.input-group-addon
+          i.fa.fa-percent
+        input.form-control(type='number', placeholder='Ingrese %', ng-model='newEvent.form.percent')
+    hr
+    .col-sm-12
+      .checker
+        label Tablets asociados:
       .loading(ng-if='!newEvent.devices')
         i.fa.fa-spinner.fa-pulse
-      .form-check(ng-repeat='(key, device) in newEvent.devices track by $index')
+      .checker(ng-repeat='(key, device) in newEvent.devices track by $index')
         label.form-check-label
           input.form-check-input(type='checkbox', ng-model='newEvent.form.devices[key]')
           span
             i.fa.fa-tablet
             |   {{key | limitTo: -4}}
+    
     .col-sm-12
-      button.btn.btn-success(ng-disabled='!newEvent.form.title')
-        | Crear Evento  
-        i.fa.fa-send
+      .icon
+        button.btn.btn-success(ng-disabled='!newEvent.form.title || !newEvent.form.percent')
+          | Crear Evento  
+          i.fa.fa-send
+      .icon
+        button.btn.btn-default(ui-sref='main')
+          | Cancelar  
+          i.fa.fa-ban

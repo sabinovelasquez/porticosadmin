@@ -1,24 +1,25 @@
-@import "../../css/functions";
-@import "../../css/colors";
+@import '../../css/functions';
+@import '../../css/colors';
 
-#view-event {
-    .devices {
-        color: lighten($dark-grey, 30);
-
-        .device {
-            float: left;
-            margin: 8px;
-
-            i {
-                margin-right: 5px;
-                font-size: 30px;
-            }
-        }
-
-        font-size: 20px;
+#view-event{
+  .details{
+    .btn{
+      margin: 0 10px 0 0;
     }
-
-    .registers {
-        margin-top: 20px;
+  }
+  .devices{
+    font-size: 20px;
+    color: lighten($dark-grey, 30);
+    .device{
+      float: left;
+      margin: 8px;
+      i{
+        font-size: 30px;
+        margin-right: 5px;
+      }
     }
+  }
+  .registers{
+    margin-top: 20px;
+  }
 }

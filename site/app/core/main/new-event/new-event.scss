@@ -3,12 +3,26 @@
 
 #new-event{
   form{
-    .form-check{
+    .checker{
+      float: left;
+      label{
+        float: left;
+        margin: 0 10px 0 0;
+      }
       .form-check-label{
         span{
-          margin-left: 10px;
+          margin-left: 8px;
         }
       }
+    }
+    hr{
+      float: left;
+      width: 100%;
+      margin: 10px 0;
+    }
+    .icon{
+      float: left;
+      margin: 0 10px 0 0;
     }
     button{
       margin-top: 10px;
