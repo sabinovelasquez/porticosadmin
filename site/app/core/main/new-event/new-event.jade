@@ -33,21 +33,28 @@ section#new-event.container
           i.fa.fa-building
           |  Día
         .panel-body
+          .row(ng-repeat='block in newEvent.blocks track by $index')
+            .col-sm-12
+              a.btn.btn-danger.pull-right(ng-click='newEvent.deleteBlock(block)')
+                i.fa.fa-times
+              h4
+                i.fa.fa-clock-o
+                |  Bloque {{$index + 1}}
+              p de {{block.start}} a {{block.end}}
+            hr
           .row
             .col-sm-6
               label
                 i.fa.fa-clock-o
                 |   Inicio:
-              select.form-control
-                option(ng-repeat='hour in newEvent.hours') {{hour}}
+              select.form-control(ng-model='newEvent.startBlock', ng-options='opt for opt in newEvent.hours')
             .col-sm-6
               label
                 i.fa.fa-clock-o
                 |   Término:
-              select.form-control
-                option(value='1') 00:00
+              select.form-control(ng-model='newEvent.endBlock', ng-options='opt for opt in newEvent.hours')
             .col-sm-12
-              a.btn.btn-success(ui-sref='new-event')
+              a.btn.btn-success(ng-click='newEvent.addBlock()')
                 | Agregar Bloque 
                 i.fa.fa-plus
         .panel-footer
