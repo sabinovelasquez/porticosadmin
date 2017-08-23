@@ -2,6 +2,11 @@
 @import '../../css/colors';
 
 #new-event{
+  .jump{
+    &:nth-child(3n){
+      clear: left;
+    }
+  }
   form{
     .checker{
       float: left;
@@ -29,7 +34,7 @@
       float: left;
       margin: 0 10px 0 0;
     }
-    button{
+    .add{
       margin-top: 10px;
     }
   }
