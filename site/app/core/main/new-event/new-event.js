@@ -3,11 +3,11 @@ export default ngModule => {
     const __ = require('underscore');
     this.sending = false;
     this.hours = [];
+    this.tempBlocks = [];
     this.days = {};
     this.blocks = {};
     this.form = {};
     this.form.percent = 80;
-    this.currentBlock = 0;
     this.enabled = false;
     this.startBlock = this.endBlock = '00:00';
     this.generateHours = () => {
@@ -19,8 +19,8 @@ export default ngModule => {
       }
     };
     this.deleteBlock = (obj) => {
-      const key = __.findKey(this.blocks, obj);
-      delete this.blocks[key];
+      const key = __.findKey(this.tempBlocks, obj);
+      this.tempBlocks.splice(key, 1);
     };
     this.deleteDay = (obj) => {
       const key = __.findKey(this.days, obj);
@@ -36,8 +36,7 @@ export default ngModule => {
       startingDay: 1,
     };
     this.addBlock = () => {
-      this.blocks[this.currentBlock] = {start: this.startBlock, end: this.endBlock};
-      this.currentBlock ++;
+      this.tempBlocks.push({start: this.startBlock, end: this.endBlock});
     };
     this.generateHours();
     firebaseAPIService.getDevices().then( (data) => {
@@ -51,10 +50,13 @@ export default ngModule => {
       const month = this.dayTitle.getMonth() + 1;
       const year = this.dayTitle.getFullYear();
       this.days[`${day}-${month}-${year}`] = {};
-      this.days[`${day}-${month}-${year}`].blocks = this.blocks;
       this.days[`${day}-${month}-${year}`].date = this.dayTitle.toString();
+      for (let blocks = 0; blocks < this.tempBlocks.length; blocks ++) {
+        this.blocks[blocks] = this.tempBlocks[blocks];
+      }
+      this.days[`${day}-${month}-${year}`].blocks = this.blocks;
       this.blocks = {};
-      this.currentBlock = 0;
+      this.tempBlocks = [];
       this.startBlock = this.endBlock = '00:00';
       if (this.getLength(this.days) > 0) {
         this.enabled = true;

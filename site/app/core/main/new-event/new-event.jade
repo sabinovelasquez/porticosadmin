@@ -43,7 +43,7 @@ section#new-event.container
                   button.btn.btn-default(type='button', ng-click='date.open=!date.open')
                     i.fa.fa-calendar
           hr
-          .row(ng-repeat='block in newEvent.blocks track by $index')
+          .row(ng-repeat='block in newEvent.tempBlocks track by $index')
             .col-sm-12
               a.btn.btn-danger.pull-right(ng-click='newEvent.deleteBlock(block)')
                 i.fa.fa-times
@@ -68,11 +68,11 @@ section#new-event.container
                 | Agregar Bloque 
                 i.fa.fa-plus
         .panel-footer
-          .add(ng-if='newEvent.getLength(newEvent.blocks) != 0 && newEvent.dayTitle')
+          .add(ng-if='newEvent.getLength(newEvent.tempBlocks) != 0 && newEvent.dayTitle')
             a.btn.btn-warning(ng-click='newEvent.addDay()')
               | Agregar Día 
               i.fa.fa-save
-          small(ng-if='newEvent.getLength(newEvent.blocks) == 0 || !newEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
+          small(ng-if='newEvent.getLength(newEvent.tempBlocks) == 0 || !newEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
     .col-sm-4.jump(ng-repeat='(key, day) in newEvent.days track by $index')
       .panel.panel-default
         .panel-heading
