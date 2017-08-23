@@ -13,7 +13,8 @@ section#edit-event.container
       .input-group
         span.input-group-addon
           i.fa.fa-percent
-        input.form-control(type='number', placeholder='Ingrese %', ng-model='editEvent.event.percent')
+        span.form-control{{editEvent.event.percent}}
+      input(type='range', ng-model='editEvent.event.percent', ng-min='1', ng-max='100')
     hr
     .col-sm-12
       .checker
@@ -26,6 +27,69 @@ section#edit-event.container
           span
             i.fa.fa-tablet
             |   {{key | limitTo: -4}}
+    hr
+    .col-sm-4.jump
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  Nuevo día
+        .panel-body
+          .row
+            .col-sm-12
+              label Día:
+              .input-group
+                input.form-control(type='text', uib-datepicker-popup='dd/MM/yyyy', ng-required='true', ng-model='editEvent.dayTitle', is-open='date.open', datepicker-options='editEvent.dateOptions', show-button-bar='false', alt-input-formats='[dd/MM/yyyy]', ng-focus='date.open=!date.open')
+                .input-group-btn
+                  button.btn.btn-default(type='button', ng-click='date.open=!date.open')
+                    i.fa.fa-calendar
+          hr
+          .row(ng-repeat='block in editEvent.blocks track by $index')
+            .col-sm-12
+              a.btn.btn-danger.pull-right(ng-click='editEvent.deleteBlock(block)')
+                i.fa.fa-times
+              h4
+                i.fa.fa-clock-o
+                |  Bloque {{$index + 1}}
+              p de {{block.start}} a {{block.end}}
+            hr
+          .row
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Inicio:
+              select.form-control(ng-model='editEvent.startBlock', ng-options='opt for opt in editEvent.hours')
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Término:
+              select.form-control(ng-model='editEvent.endBlock', ng-options='opt for opt in editEvent.hours')
+            .col-sm-12
+              a.add.btn.btn-success(ng-click='editEvent.addBlock()')
+                | Agregar Bloque 
+                i.fa.fa-plus
+        .panel-footer
+          .add(ng-if='editEvent.getLength(editEvent.blocks) != 0 && editEvent.dayTitle')
+            a.btn.btn-warning(ng-click='editEvent.addDay()')
+              | Agregar Día 
+              i.fa.fa-save
+          small(ng-if='editEvent.getLength(editEvent.blocks) == 0 || !editEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
+    .col-sm-4.jump(ng-repeat='(key, day) in editEvent.event.days track by $index')
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  {{key}}
+        .panel-body
+          .row(ng-repeat='block in day.blocks track by $index')
+            .col-sm-12
+              h4
+                i.fa.fa-clock-o
+                |  Bloque {{$index + 1}}
+              p de {{block.start}} a {{block.end}}
+            hr
+        .panel-footer
+          a.btn.btn-danger(ng-click='editEvent.deleteDay(day)')
+            | Eliminar día
+            i.fa.fa-trash
     .col-sm-12
       .icon
         button.btn.btn-success(ng-disabled='!editEvent.event.title')
