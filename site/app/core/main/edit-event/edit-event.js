@@ -2,6 +2,23 @@ export default ngModule => {
   ngModule.controller('EditEventCtrl', function EditEventCtrl(firebaseAPIService, $stateParams, $state) {
     this.eventKey = $stateParams.key;
     this.form = {};
+    this.hours = [];
+    this.startBlock = this.endBlock = '00:00';
+    this.generateHours = () => {
+      for ( let hour = 0; hour < 24; hour++) {
+        if (hour < 10) {
+          hour = `0${hour}`;
+        }
+        this.hours.push(`${hour}:00`);
+      }
+    };
+    this.generateHours();
+    this.dateOptions = {
+      formatYear: 'yy',
+      maxDate: new Date(2020, 5, 22),
+      minDate: new Date(),
+      startingDay: 1,
+    };
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
       this.event = data;
     });
