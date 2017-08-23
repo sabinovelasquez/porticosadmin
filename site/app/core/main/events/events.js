@@ -11,6 +11,9 @@ export default ngModule => {
           this.events = data;
           this.update();
         });
+        this.getLength = (obj) =>{
+          return Object.keys(obj).length;
+        };
         this.update = () => {
           $timeout(this.update, 9000);
           angular.forEach(this.events, (value, eventKey) => {
