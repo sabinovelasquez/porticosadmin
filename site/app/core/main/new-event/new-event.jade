@@ -57,13 +57,15 @@ section#new-event.container
               label
                 i.fa.fa-clock-o
                 |   Inicio:
-              select.form-control(ng-model='newEvent.startBlock', ng-options='opt for opt in newEvent.hours')
+              input.form-control(ng-model='newEvent.startBlock', type='text', placeholder='00:00')
             .col-sm-6
               label
                 i.fa.fa-clock-o
                 |   Término:
-              select.form-control(ng-model='newEvent.endBlock', ng-options='opt for opt in newEvent.hours')
+              input.form-control(ng-model='newEvent.endBlock', type='text', placeholder='00:00')
             .col-sm-12
+              p
+                small.red(ng-if='newEvent.blockError') {{newEvent.blockError}}
               a.add.btn.btn-success(ng-click='newEvent.addBlock()')
                 | Agregar Bloque 
                 i.fa.fa-plus

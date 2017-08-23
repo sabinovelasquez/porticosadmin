@@ -36,7 +36,12 @@ export default ngModule => {
       startingDay: 1,
     };
     this.addBlock = () => {
-      this.tempBlocks.push({start: this.startBlock, end: this.endBlock});
+      if (this.startBlock.length === 5 && this.endBlock.length === 5 ) {
+        this.tempBlocks.push({start: this.startBlock, end: this.endBlock});
+        this.blockError = '';
+      } else {
+        this.blockError = 'El formato de hora debe ser del tipo 00:00 (rando de 00:00 a 23:59)';
+      }
     };
     this.generateHours();
     firebaseAPIService.getDevices().then( (data) => {
