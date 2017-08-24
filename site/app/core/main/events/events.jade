@@ -45,8 +45,14 @@ section#events
               i.fa.fa-spinner.fa-pulse
             {{event.percent}}%
           .content
+            i.fa.fa-users
+            |  Asistentes:  
+            span(ng-if='!event.users && event.users!=0')
+              i.fa.fa-spinner.fa-pulse
+            {{event.users}}
+          .content
             i.fa.fa-qrcode
-            |  Escaneados:  
+            |  Códigos escaneados:  
             span(ng-if='!event.scanned && event.scanned!=0')
               i.fa.fa-spinner.fa-pulse
             {{event.scanned}}

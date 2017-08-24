@@ -6,6 +6,7 @@ export default ngModule => {
       scope: {},
       controllerAs: 'events',
       controller: function eventsCtrl() {
+        const __ = require('underscore');
         this.showArchived = false;
         firebaseAPIService.getEvents().then( (data) => {
           this.events = data;
@@ -19,8 +20,9 @@ export default ngModule => {
           angular.forEach(this.events, (value, eventKey) => {
             if (this.events[eventKey].registers) {
               this.events[eventKey].scanned = Object.keys(this.events[eventKey].registers).length;
+              this.events[eventKey].users = Object.keys(__.countBy(this.events[eventKey].registers, 'code')).length;
             }else {
-              this.events[eventKey].scanned = 0;
+              this.users = 0;
             }
             firebaseAPIService.getEventDevices(eventKey).then( (devices) => {
               this.events[eventKey].devices = devices.length;
