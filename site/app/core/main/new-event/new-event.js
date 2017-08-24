@@ -23,6 +23,7 @@ export default ngModule => {
       this.tempBlocks.splice(key, 1);
     };
     this.deleteDay = (obj) => {
+      this.errorDay = '';
       const key = __.findKey(this.days, obj);
       delete this.days[key];
       if (this.getLength(this.days) === 0) {
@@ -36,11 +37,11 @@ export default ngModule => {
       startingDay: 1,
     };
     this.addBlock = () => {
-      if (this.startBlock.length === 5 && this.endBlock.length === 5 ) {
+      if (this.startBlock.length === 5 && this.endBlock.length === 5 && this.startBlock.indexOf(':') === 2 && this.endBlock.indexOf(':') === 2) {
         this.tempBlocks.push({start: this.startBlock, end: this.endBlock});
         this.blockError = '';
-      } else {
-        this.blockError = 'El formato de hora debe ser del tipo 00:00 (rando de 00:00 a 23:59)';
+      }else {
+        this.blockError = 'El formato de hora debe ser del tipo 00:00 (rango de 00:00 a 23:59)';
       }
     };
     this.generateHours();
@@ -50,7 +51,18 @@ export default ngModule => {
     this.getLength = (obj) =>{
       return Object.keys(obj).length;
     };
+    this.checkDay = () => {
+      const day = this.dayTitle.getDate();
+      const month = this.dayTitle.getMonth() + 1;
+      const year = this.dayTitle.getFullYear();
+      if ( !this.days[`${day}-${month}-${year}`] ) {
+        this.addDay();
+      }else {
+        this.errorDay = 'Esta fecha ya ha sido creada, seleccione otra fecha desde el calendario.';
+      }
+    };
     this.addDay = () => {
+      this.errorDay = '';
       const day = this.dayTitle.getDate();
       const month = this.dayTitle.getMonth() + 1;
       const year = this.dayTitle.getFullYear();

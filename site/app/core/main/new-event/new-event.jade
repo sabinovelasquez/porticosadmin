@@ -71,7 +71,9 @@ section#new-event.container
                 i.fa.fa-plus
         .panel-footer
           .add(ng-if='newEvent.getLength(newEvent.tempBlocks) != 0 && newEvent.dayTitle')
-            a.btn.btn-warning(ng-click='newEvent.addDay()')
+            p
+              small.red(ng-if='newEvent.errorDay') {{newEvent.errorDay}}
+            a.btn.btn-warning(ng-click='newEvent.checkDay()')
               | Agregar Día 
               i.fa.fa-save
           small(ng-if='newEvent.getLength(newEvent.tempBlocks) == 0 || !newEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
@@ -90,7 +92,7 @@ section#new-event.container
             hr
         .panel-footer
           a.btn.btn-danger(ng-click='newEvent.deleteDay(day)')
-            | Eliminar día
+            | Eliminar día  
             i.fa.fa-trash
     .col-sm-12
       p
