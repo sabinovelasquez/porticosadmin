@@ -5,6 +5,7 @@
 @import './core/main/new-event/new-event';
 @import './core/main/edit-event/edit-event';
 @import './core/main/view-event/view-event';
+@import './core/main/devices/devices';
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500);
 
@@ -21,6 +22,9 @@ h2{
 section{
   width: 90%;
   margin: auto;
+}
+a{
+  cursor: pointer;
 }
 .red{
   color: $red;

@@ -10,6 +10,10 @@
       .collapse.navbar-collapse(ng-class='{"in":navCollapsed}')
         ul.nav.navbar-nav
           li
-            a(du-smooth-scroll, duration='800', href='#example')
+            a(ui-sref='main')
               i.fa.fa-home
               |   Home
+          li
+            a(ui-sref='devices')
+              i.fa.fa-tablet
+              |   Dispositivos
