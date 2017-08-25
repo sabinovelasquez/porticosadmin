@@ -16,7 +16,7 @@ section#view-event
       i.fa.fa-tablet
       {{key | limitTo: -4}}
   .registers
-    table.table.table-hover.table-bordered
+    table.table.table-hover.table-bordered.table-responsive
       thead
         tr
           th
@@ -44,9 +44,12 @@ section#view-event
       tbody
         tr(ng-repeat='user in viewEvent.event.registers')
           td {{user.code}}
-          td {{user.event}}
-          td {{user.date}}
-          td {{user.where}}
           td {{user.hour}}
-
-    p(ng-show='!device.registers') No hay registros para este dispositivo.
+          td --
+          td --
+          td --
+      tbody(ng-if='viewEvent.loading')
+        tr
+          td.text-center(colspan=5)
+            i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
+    p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
