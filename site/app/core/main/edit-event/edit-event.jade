@@ -1,7 +1,7 @@
 nav-bar
 section#edit-event.container
   h1 Editar Evento
-  form.form-group(ng-submit='editEvent.submit()', ng-model='editEvent.form')
+  form.form-group(ng-model='editEvent.form')
     .col-sm-8
       label Editar nombre del Evento
       .input-group
@@ -23,7 +23,7 @@ section#edit-event.container
         i.fa.fa-spinner.fa-pulse
       .checker(ng-repeat='(key, device) in editEvent.devices track by $index')
         label.form-check-label
-          input.form-check-input(type='checkbox', ng-model='editEvent.form.devices[key]', ng-checked='device.checked')
+          input.form-check-input(type='checkbox', ng-checked='device.checked', ng-model='device[key]')
           span
             i.fa.fa-tablet
             |   {{key | limitTo: -4}}
@@ -43,7 +43,7 @@ section#edit-event.container
                   button.btn.btn-default(type='button', ng-click='date.open=!date.open')
                     i.fa.fa-calendar
           hr
-          .row(ng-repeat='block in editEvent.blocks track by $index')
+          .row(ng-repeat='block in editEvent.tempBlocks track by $index')
             .col-sm-12
               a.btn.btn-danger.pull-right(ng-click='editEvent.deleteBlock(block)')
                 i.fa.fa-times
@@ -57,23 +57,27 @@ section#edit-event.container
               label
                 i.fa.fa-clock-o
                 |   Inicio:
-              select.form-control(ng-model='editEvent.startBlock', ng-options='opt for opt in editEvent.hours')
+              input.form-control(ng-model='editEvent.startBlock', type='text', placeholder='00:00')
             .col-sm-6
               label
                 i.fa.fa-clock-o
                 |   Término:
-              select.form-control(ng-model='editEvent.endBlock', ng-options='opt for opt in editEvent.hours')
+              input.form-control(ng-model='editEvent.endBlock', type='text', placeholder='00:00')
             .col-sm-12
+              p
+                small.red(ng-if='editEvent.blockError') {{editEvent.blockError}}
               a.add.btn.btn-success(ng-click='editEvent.addBlock()')
                 | Agregar Bloque 
                 i.fa.fa-plus
         .panel-footer
-          .add(ng-if='editEvent.getLength(editEvent.blocks) != 0 && editEvent.dayTitle')
-            a.btn.btn-warning(ng-click='editEvent.addDay()')
+          .add(ng-if='editEvent.getLength(editEvent.tempBlocks) != 0 && editEvent.dayTitle')
+            p
+              small.red(ng-if='editEvent.errorDay') {{editEvent.errorDay}}
+            a.btn.btn-warning(ng-click='editEvent.checkDay()')
               | Agregar Día 
               i.fa.fa-save
-          small(ng-if='editEvent.getLength(editEvent.blocks) == 0 || !editEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
-    .col-sm-4.jump(ng-repeat='(key, day) in editEvent.event.days track by $index')
+          small(ng-if='editEvent.getLength(editEvent.tempBlocks) == 0 || !editEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
+    .col-sm-4.jump(ng-repeat='(key, day) in editEvent.days track by $index')
       .panel.panel-default
         .panel-heading
           i.fa.fa-building
@@ -88,13 +92,22 @@ section#edit-event.container
             hr
         .panel-footer
           a.btn.btn-danger(ng-click='editEvent.deleteDay(day)')
-            | Eliminar día
+            | Eliminar día  
             i.fa.fa-trash
     .col-sm-12
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.event.title, "fa-check-square-o green":editEvent.event.title}')
+        small  Ingrese Nombre de evento.
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.event.percent, "fa-check-square-o green":editEvent.event.percent}')
+        small  Ingrese porcentaje requerido.
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.enabled, "fa-check-square-o green":editEvent.enabled}')
+        small  Cree al menos 1 día para el evento.
       .icon
-        button.btn.btn-success(ng-disabled='!editEvent.event.title')
+        button.btn.btn-success(ng-click='editEvent.submitForm()', ng-disabled='!editEvent.event.title || !editEvent.event.percent || !editEvent.enabled || editEvent.sending')
           | Modificar Evento  
-          i.fa.fa-send
+          i.fa(ng-class='{"fa-send":!editEvent.sending, "fa-spinner fa-pulse":editEvent.sending}')
       .icon(ng-if='!editEvent.event.archived && editEvent.event.title')
         button.btn.btn-danger(ng-click='editEvent.archive(true)')
           | Archivar Evento  

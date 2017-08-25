@@ -22,7 +22,7 @@ export default ngModule => {
               this.events[eventKey].scanned = Object.keys(this.events[eventKey].registers).length;
               this.events[eventKey].users = Object.keys(__.countBy(this.events[eventKey].registers, 'code')).length;
             }else {
-              this.users = 0;
+              this.events[eventKey].scanned = this.events[eventKey].users = 0;
             }
             firebaseAPIService.getEventDevices(eventKey).then( (devices) => {
               this.events[eventKey].devices = devices.length;

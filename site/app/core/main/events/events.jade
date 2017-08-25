@@ -5,7 +5,7 @@ section#events
     i.fa(ng-class='{"fa-toggle-on green":events.showArchived, "fa-toggle-off":!events.showArchived}')
   h1 Eventos
   .row
-    .col-sm-6.col-lg-4
+    .col-sm-6.col-lg-4.jump
       .panel.panel-default
         .panel-heading
           i.fa.fa-building
@@ -16,7 +16,7 @@ section#events
             i.fa.fa-plus
     .col-sm-6.col-lg-4.loading(ng-if='!events.events')
       i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
-    .col-sm-6.col-lg-4(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
+    .col-sm-6.col-lg-4.jump(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
       .panel.panel-default(ng-class='{"grey":event.archived}')
         .panel-heading
           .row

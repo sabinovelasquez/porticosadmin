@@ -44,12 +44,13 @@ export default ngModule => {
           return setEvent.$save();
         });
       },
-      setEventData: (name, eventKey, percent) => {
+      setEventData: (name, eventKey, percent, days) => {
         const ref = firebaseClient.child(`events/${eventKey}`);
         const setEvent = $firebaseObject(ref);
         setEvent.$loaded().then(() => {
           setEvent.title = name;
           setEvent.percent = percent;
+          setEvent.days = days;
           return setEvent.$save();
         });
       },
