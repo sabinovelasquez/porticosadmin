@@ -18,6 +18,19 @@ export default ngModule => {
         const events = $firebaseObject(ref);
         return events.$loaded();
       },
+      archiveEvent: (eventKey, bol) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const setEvent = $firebaseObject(ref);
+        setEvent.$loaded().then(() => {
+          setEvent.archived = bol;
+          return setEvent.$save();
+        });
+      },
+      getEvent: (eventKey) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const events = $firebaseObject(ref);
+        return events.$loaded();
+      },
       newEvent: (event) => {
         const ref = firebaseClient.child('events');
         const newEvent = $firebaseArray(ref);
@@ -28,6 +41,16 @@ export default ngModule => {
         const setEvent = $firebaseObject(ref);
         setEvent.$loaded().then(() => {
           setEvent.eventKey = eventKey;
+          return setEvent.$save();
+        });
+      },
+      setEventData: (name, eventKey, percent, days) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const setEvent = $firebaseObject(ref);
+        setEvent.$loaded().then(() => {
+          setEvent.title = name;
+          setEvent.percent = percent;
+          setEvent.days = days;
           return setEvent.$save();
         });
       },

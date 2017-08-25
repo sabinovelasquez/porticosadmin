@@ -1,0 +1,122 @@
+nav-bar
+section#edit-event.container
+  h1 Editar Evento
+  form.form-group(ng-model='editEvent.form')
+    .col-sm-8
+      label Editar nombre del Evento
+      .input-group
+        span.input-group-addon
+          i.fa.fa-building
+        input.form-control(type='text', placeholder='Ingrese nombre del Evento', ng-model='editEvent.event.title')
+    .col-sm-4
+      label Porcentaje requerido para Certificación
+      .input-group
+        span.input-group-addon
+          i.fa.fa-percent
+        span.form-control{{editEvent.event.percent}}
+      input(type='range', ng-model='editEvent.event.percent', ng-min='1', ng-max='100')
+    hr
+    .col-sm-12
+      .checker
+        label Asignar tablets:
+      .loading(ng-if='!editEvent.devices')
+        i.fa.fa-spinner.fa-pulse
+      .checker(ng-repeat='(key, device) in editEvent.devices track by $index')
+        label.form-check-label
+          input.form-check-input(type='checkbox', ng-checked='device.checked', ng-model='device[key]')
+          span
+            i.fa.fa-tablet
+            |   {{key | limitTo: -4}}
+    hr
+    .col-sm-4.jump
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  Nuevo día
+        .panel-body
+          .row
+            .col-sm-12
+              label Día:
+              .input-group
+                input.form-control(type='text', uib-datepicker-popup='dd/MM/yyyy', ng-required='true', ng-model='editEvent.dayTitle', is-open='date.open', datepicker-options='editEvent.dateOptions', show-button-bar='false', alt-input-formats='[dd/MM/yyyy]', ng-focus='date.open=!date.open')
+                .input-group-btn
+                  button.btn.btn-default(type='button', ng-click='date.open=!date.open')
+                    i.fa.fa-calendar
+          hr
+          .row(ng-repeat='block in editEvent.tempBlocks track by $index')
+            .col-sm-12
+              a.btn.btn-danger.pull-right(ng-click='editEvent.deleteBlock(block)')
+                i.fa.fa-times
+              h4
+                i.fa.fa-clock-o
+                |  Bloque {{$index + 1}}
+              p de {{block.start}} a {{block.end}}
+            hr
+          .row
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Inicio:
+              input.form-control(ng-model='editEvent.startBlock', type='text', placeholder='00:00')
+            .col-sm-6
+              label
+                i.fa.fa-clock-o
+                |   Término:
+              input.form-control(ng-model='editEvent.endBlock', type='text', placeholder='00:00')
+            .col-sm-12
+              p
+                small.red(ng-if='editEvent.blockError') {{editEvent.blockError}}
+              a.add.btn.btn-success(ng-click='editEvent.addBlock()')
+                | Agregar Bloque 
+                i.fa.fa-plus
+        .panel-footer
+          .add(ng-if='editEvent.getLength(editEvent.tempBlocks) != 0 && editEvent.dayTitle')
+            p
+              small.red(ng-if='editEvent.errorDay') {{editEvent.errorDay}}
+            a.btn.btn-warning(ng-click='editEvent.checkDay()')
+              | Agregar Día 
+              i.fa.fa-save
+          small(ng-if='editEvent.getLength(editEvent.tempBlocks) == 0 || !editEvent.dayTitle') Agrege fecha y bloque de horas para crear día.
+    .col-sm-4.jump(ng-repeat='(key, day) in editEvent.days track by $index')
+      .panel.panel-default
+        .panel-heading
+          i.fa.fa-building
+          |  {{key}}
+        .panel-body
+          .row(ng-repeat='block in day.blocks track by $index')
+            .col-sm-12
+              h4
+                i.fa.fa-clock-o
+                |  Bloque {{$index + 1}}
+              p de {{block.start}} a {{block.end}}
+            hr
+        .panel-footer
+          a.btn.btn-danger(ng-click='editEvent.deleteDay(day)')
+            | Eliminar día  
+            i.fa.fa-trash
+    .col-sm-12
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.event.title, "fa-check-square-o green":editEvent.event.title}')
+        small  Ingrese Nombre de evento.
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.event.percent, "fa-check-square-o green":editEvent.event.percent}')
+        small  Ingrese porcentaje requerido.
+      p
+        i.fa(ng-class='{"fa-square-o red":!editEvent.enabled, "fa-check-square-o green":editEvent.enabled}')
+        small  Cree al menos 1 día para el evento.
+      .icon
+        button.btn.btn-success(ng-click='editEvent.submitForm()', ng-disabled='!editEvent.event.title || !editEvent.event.percent || !editEvent.enabled || editEvent.sending')
+          | Modificar Evento  
+          i.fa(ng-class='{"fa-send":!editEvent.sending, "fa-spinner fa-pulse":editEvent.sending}')
+      .icon(ng-if='!editEvent.event.archived && editEvent.event.title')
+        button.btn.btn-danger(ng-click='editEvent.archive(true)')
+          | Archivar Evento  
+          i.fa.fa-archive
+      .icon(ng-if='editEvent.event.archived && editEvent.event.title')
+        button.btn.btn-primary(ng-click='editEvent.archive(false)')
+          | Restaurar Evento  
+          i.fa.fa-archive
+      .icon
+        button.btn.btn-default(ui-sref='main')
+          | Cancelar  
+          i.fa.fa-ban

@@ -1,0 +1,55 @@
+nav-bar
+section#view-event
+  h1
+    .loading(ng-if='!viewEvent.event.title')
+      i.fa.fa-spinner.fa-pulse
+    {{viewEvent.event.title}}
+  .details
+    a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento')
+      i.fa.fa-pencil-square-o
+    a.btn.btn-default(ui-sref='main', tooltip-placement='right', uib-tooltip='Ver todos los Eventos')
+      i.fa.fa-home
+  .devices
+    .loading(ng-if='!viewEvent.devices')
+      i.fa.fa-spinner.fa-pulse
+    .device(ng-repeat='(key, device) in viewEvent.devices')
+      i.fa.fa-tablet
+      {{key | limitTo: -4}}
+  .registers
+    table.table.table-hover.table-bordered.table-responsive
+      thead
+        tr
+          th
+          th(colspan=2)
+            .i.fa.fa-calendar
+            |  Día 1
+          th
+          th
+        tr
+          th 
+            .i.fa.fa-qrcode
+            |  Código
+          th 
+            .i.fa.fa-clock-o
+            |  Hora
+          th
+            .i.fa.fa-percent
+            |  Asistencia
+          th
+            .i.fa.fa-clock-o
+            |  Total
+          th
+            .i.fa.fa-certificate
+            |  Aprov / Rech
+      tbody
+        tr(ng-repeat='user in viewEvent.event.registers')
+          td {{user.code}}
+          td {{user.hour}}
+          td --
+          td --
+          td --
+      tbody(ng-if='viewEvent.loading')
+        tr
+          td.text-center(colspan=5)
+            i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
+    p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.

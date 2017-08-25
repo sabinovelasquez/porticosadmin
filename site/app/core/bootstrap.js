@@ -4,12 +4,12 @@ const ngModule = angular.module('app', [
   'duScroll',
   'ngAnimate',
   'ngParallax',
-  'ngResource',
   'ngSanitize',
   'ngTouch',
   'ui.bootstrap',
   'ui.router',
   'firebase',
+  'ngCsv',
 ]);
 
 require('./config')(ngModule);
