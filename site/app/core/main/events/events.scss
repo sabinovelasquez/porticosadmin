@@ -2,19 +2,38 @@
 @import '../../css/colors';
 
 #events{
+  .jump{
+    @media screen and (min-width: 1200px){
+      &:nth-child(4n){
+        clear: left;
+      }
+    }
+  }
+  .show{
+    text-align: right;
+    i{
+      font-size: 22px;
+    }
+  }
   .loading{
-    color: $green;
     text-align: center;
+    color: $green;
+  }
+  .panel{
+    &.grey{
+      opacity: .5;
+    }
   }
   .panel-heading{
     a{
       font-size: 12px;
       font-weight: 300;
       line-height: 12px;
-      margin-top: -3px;
+      margin: -3px 2px 0;
     }
   }
   .panel-body{
+    font-size: .8em;
     .content{
       height: 35px;
       i{

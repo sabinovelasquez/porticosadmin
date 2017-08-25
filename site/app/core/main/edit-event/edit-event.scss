@@ -1,12 +1,7 @@
 @import '../../css/functions';
 @import '../../css/colors';
 
-#new-event{
-  .jump{
-    &:nth-child(3n){
-      clear: left;
-    }
-  }
+#edit-event{
   form{
     .checker{
       float: left;
@@ -18,11 +13,6 @@
         span{
           margin-left: 8px;
         }
-      }
-    }
-    .panel-body{
-      a{
-        margin-top: 5px;
       }
     }
     hr{
@@ -37,9 +27,5 @@
     .add{
       margin-top: 10px;
     }
-  }
-  .bloque{
-    display: inline;
-    margin: 10px;
   }
 }

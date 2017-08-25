@@ -1,6 +1,7 @@
 export default ngModule => {
-  ngModule.controller('NewEventCtrl', function NewEventCtrl(firebaseAPIService, $state) {
+  ngModule.controller('EditEventCtrl', function EditEventCtrl(firebaseAPIService, $state, $stateParams) {
     const __ = require('underscore');
+    this.eventKey = $stateParams.key;
     this.sending = false;
     this.hours = [];
     this.tempBlocks = [];
@@ -8,8 +9,24 @@ export default ngModule => {
     this.blocks = {};
     this.form = {};
     this.form.percent = 80;
-    this.enabled = false;
+    this.enabled = true;
     this.startBlock = this.endBlock = '00:00';
+    firebaseAPIService.getEvent(this.eventKey).then( (data) => {
+      this.event = data;
+      this.days = data.days;
+    });
+    firebaseAPIService.getDevices().then( (data) => {
+      this.devices = data;
+      angular.forEach(this.devices, (device, key) => {
+        if ( device.settings.eventKey === this.eventKey) {
+          this.devices[key].checked = true;
+          this.devices[key][key] = true;
+        }else {
+          this.devices[key].checked = false;
+        }
+      });
+    });
+
     this.generateHours = () => {
       for ( let hour = 0; hour < 24; hour++) {
         if (hour < 10) {
@@ -45,9 +62,6 @@ export default ngModule => {
       }
     };
     this.generateHours();
-    firebaseAPIService.getDevices().then( (data) => {
-      this.devices = data;
-    });
     this.getLength = (obj) =>{
       return Object.keys(obj).length;
     };
@@ -79,20 +93,30 @@ export default ngModule => {
         this.enabled = true;
       }
     };
-    this.submit = () => {
+    this.submitForm = () => {
       this.sending = true;
-      firebaseAPIService.newEvent({title: this.form.title, archived: false, percent: this.form.percent, days: this.days}).then( (data) => {
-        this.configDevices(data.key);
-      });
+      firebaseAPIService.setEventData(this.event.title, this.eventKey, this.event.percent, this.days);
+      this.configDevices();
     };
-    this.configDevices = (eventKey) => {
-      if (this.form.devices) {
-        const devices = Object.keys(this.form.devices);
-        angular.forEach(devices, (deviceId) => {
-          firebaseAPIService.setDevice(deviceId, eventKey);
-        });
-      }
+    this.archive = (bol) => {
+      firebaseAPIService.archiveEvent(this.eventKey, bol);
+      $state.go('main');
+    };
+    this.configDevices = () => {
+      angular.forEach(this.devices, (device, key) => {
+        if (device[key] === false) {
+          delete this.devices[key][key];
+        }
+        if (this.devices[key][key]) {
+          firebaseAPIService.setDevice(key, this.eventKey);
+        }
+        if (device.checked && !device[key]) {
+          firebaseAPIService.setDevice(key, 'no-event');
+        }
+      });
+      this.sending = false;
       $state.go('main');
     };
   });
 };
+
