@@ -1,0 +1,13 @@
+@import '../../css/functions';
+@import '../../css/colors';
+
+#devices{
+  .input-group{
+    margin: 10px 0;
+  }
+  .input-group-addon{
+    i{
+      font-size: 20px;
+    }
+  }
+}

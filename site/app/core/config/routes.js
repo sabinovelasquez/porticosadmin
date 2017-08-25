@@ -26,6 +26,12 @@ export default ngModule => {
         template: require('../main/view-event/view-event.jade'),
         controller: 'ViewEventCtrl',
         controllerAs: 'viewEvent',
+      })
+      .state('devices', {
+        url: '/devices',
+        template: require('../main/devices/devices.jade'),
+        controller: 'DevicesCtrl',
+        controllerAs: 'devices',
       });
     }
   );

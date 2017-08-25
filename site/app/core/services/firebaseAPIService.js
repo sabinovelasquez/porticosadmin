@@ -28,8 +28,8 @@ export default ngModule => {
       },
       getEvent: (eventKey) => {
         const ref = firebaseClient.child(`events/${eventKey}`);
-        const events = $firebaseObject(ref);
-        return events.$loaded();
+        const event = $firebaseObject(ref);
+        return event.$loaded();
       },
       newEvent: (event) => {
         const ref = firebaseClient.child('events');
@@ -43,6 +43,11 @@ export default ngModule => {
           setEvent.eventKey = eventKey;
           return setEvent.$save();
         });
+      },
+      updateDevice: (deviceId) => {
+        const ref = firebaseClient.child(`devices/${deviceId}`);
+        const upDevice = $firebaseObject(ref);
+        return upDevice.$loaded();
       },
       setEventData: (name, eventKey, percent, days) => {
         const ref = firebaseClient.child(`events/${eventKey}`);
