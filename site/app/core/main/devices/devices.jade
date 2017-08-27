@@ -28,11 +28,12 @@ section#devices
             a(ui-sref='view-event({key:device.settings.eventKey})')
               i.fa.fa-link
               |  ver evento 
-          form(ng-submit='devices.saveDevice(key)')
+          form(ng-submit='devices.saveDevice(key)', ng-if='devices.events')
             .input-group
               .input-group-addon
                 i.fa.fa-th-large
-              input.form-control(type='text', ng-model='device.settings.event')
+              select.form-control(ng-model='device.settings.event')
+                option(ng-repeat='option in devices.getBlocks(device.settings.eventKey)') Bloque {{option}}
             .input-group
               .input-group-addon
                 i.fa.fa-clock-o
