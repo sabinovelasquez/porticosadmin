@@ -41,11 +41,16 @@ section#view-event
             tr.amet
               th
               th.text-center(ng-repeat='(key, day) in viewEvent.event.days track by $index', colspan='{{day.blocks.length}}') {{key}} Bloques
-              th(colspan='2')
+              th.text-center(colspan='3') Requerido: {{viewEvent.event.percent}} %
             tr.amet
               th.text-center Código
               th.text-center(ng-repeat='(key, block) in viewEvent.blocks track by $index') {{block.start}} - {{block.end}}
-              th.text-center Requerido: {{viewEvent.event.percent}} %
+              th.text-center
+                i.fa.fa-percent
+                |  Horas asistidas
+              th.text-center
+                i.fa.fa-percent
+                |  Asistencia bloques
               th.text-center APRV / RECH
           tbody
             tr(ng-repeat='(key, user) in viewEvent.excel track by $index')
@@ -55,5 +60,7 @@ section#view-event
               td(ng-repeat='info in viewEvent.blocks')
                 span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
               td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
+              td.text-right {{viewEvent.getPercentageTotal(user)}}%
               td.text-center
                 i.fa(ng-class='viewEvent.getPercentage(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
+                i.fa(ng-class='viewEvent.getPercentageTotal(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')

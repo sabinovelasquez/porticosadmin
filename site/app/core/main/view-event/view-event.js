@@ -96,6 +96,15 @@ export default ngModule => {
       });
       return (percent / user.length);
     };
+    this.getPercentageTotal = (user) => {
+      let percent = 0;
+      __.each(user, (data) => {
+        if (data.percent) {
+          percent += 100;
+        }
+      });
+      return (percent / user.length);
+    };
     firebaseAPIService.getDevices().then( (data) => {
       this.loading = false;
       angular.forEach(data, (device, key) => {
