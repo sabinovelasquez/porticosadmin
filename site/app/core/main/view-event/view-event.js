@@ -7,6 +7,7 @@ export default ngModule => {
     this.excel = [];
     this.devices = {};
     this.blocks = [];
+    this.bLockNums = [];
     this.headers = ['Código', 'Fecha', 'Bloque', 'Hora', 'Sala'];
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
       this.event = data;
@@ -42,18 +43,31 @@ export default ngModule => {
           });
         });
       });
-      for (let current = 0; current < this.blocks.length; current ++) {
-        if (temp[current] && temp[current].date === this.blocks[current].date) {
-          finalTemp.push(temp[current]);
+      let comp = 0;
+      this.bLockNums = [];
+      __.each(this.blocks, (block, numKey) => {
+        this.bLockNums.push(numKey);
+      });
+      __.each(this.blocks, (block, key)  => {
+        if (temp[key]) {
+          finalTemp.push(temp[key]);
+          const str = temp[key].event.split(' ');
+          const toRem = __.indexOf(this.bLockNums, (str[1] - 1));
+          this.bLockNums.splice(toRem, 1);
         } else {
+          comp = this.bLockNums[0];
+          const toRem = __.indexOf(this.bLockNums, comp);
+          this.bLockNums.splice(toRem, 1);
           finalTemp.push({
             code: id,
-            date: this.blocks[current].date,
+            date: '-',
+            event: `Bloque ${comp + 1}`,
             hour: '-',
           });
         }
-      }
-      this.excel.push(finalTemp);
+      });
+      const orderArray = __.sortBy( finalTemp, ( item ) => { return item.event; } );
+      this.excel.push(orderArray);
     };
     this.checkTime = (startTime, endTime, timeToCheck) => {
       const check = moment(timeToCheck, 'HH:mm');
