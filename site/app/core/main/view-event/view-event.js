@@ -8,7 +8,6 @@ export default ngModule => {
     this.devices = {};
     this.blocks = [];
     this.bLockNums = [];
-    this.headers = ['Código', 'Fecha', 'Bloque', 'Hora', 'Sala'];
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
       this.event = data;
       __.each(this.event.days, (day, key) => {
