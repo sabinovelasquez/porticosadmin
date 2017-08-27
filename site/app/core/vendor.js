@@ -15,7 +15,6 @@ module.exports = () => {
   require('font-awesome-webpack');
   require('firebase');
   require('angularfire');
-  require('ng-csv');
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');
 };

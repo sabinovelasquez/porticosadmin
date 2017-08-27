@@ -2,6 +2,10 @@
 @import '../../css/colors';
 
 #view-event{
+  .amet{
+    color: white;
+    background: $amet;
+  }
   .details{
     .btn{
       margin: 0 10px 0 0;
@@ -21,5 +25,8 @@
   }
   .registers{
     margin-top: 20px;
+  }
+  .table{
+    font-size: .8em;
   }
 }
