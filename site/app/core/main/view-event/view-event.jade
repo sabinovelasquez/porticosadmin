@@ -40,13 +40,20 @@ section#view-event
           thead
             tr.amet
               th
-              th(ng-repeat='(key, day) in viewEvent.event.days track by $index', colspan='{{day.blocks.length}}') {{key}} Bloques
+              th.text-center(ng-repeat='(key, day) in viewEvent.event.days track by $index', colspan='{{day.blocks.length}}') {{key}} Bloques
+              th(colspan='2')
             tr.amet
-              th Código
-              th(ng-repeat='(key, block) in viewEvent.blocks track by $index') {{block.start}} - {{block.end}}
+              th.text-center Código
+              th.text-center(ng-repeat='(key, block) in viewEvent.blocks track by $index') {{block.start}} - {{block.end}}
+              th.text-center Requerido: {{viewEvent.event.percent}} %
+              th.text-center APRV / RECH
           tbody
             tr(ng-repeat='(key, user) in viewEvent.excel track by $index')
               td
                 i.fa.fa-qrcode
                 |  {{user[0].code}}
-              td(ng-repeat='info in viewEvent.blocks') {{user[$index].hour}}
+              td(ng-repeat='info in viewEvent.blocks')
+                span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
+              td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
+              td.text-center
+                i.fa(ng-class='viewEvent.getPercentage(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
