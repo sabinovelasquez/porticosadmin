@@ -20,11 +20,33 @@ section#view-event
   .row
     .col-sm-12
       p(ng-if='viewEvent.loading')
-        i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
-      .registers(ng-if='viewEvent.event.registers')
-        p(ng-show='viewEvent.event.registers && !viewEvent.loading')
-          button.btn.btn-success(ng-csv='viewEvent.excel', csv-header='viewEvent.headers', filename='{{viewEvent.event.title}}.csv')
-            | Descargar Excel  
-            i.fa.fa-file-excel-o
-        p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
-      p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
+        
+      //- p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
+      //- .registers(ng-if='viewEvent.event.registers')
+      //-   p(ng-show='viewEvent.event.registers && !viewEvent.loading')
+      //-     button.btn.btn-success(ng-csv='viewEvent.excel', csv-header='viewEvent.headers', filename='{{viewEvent.event.title}}.csv')
+      //-       | Descargar Excel  
+      //-       i.fa.fa-file-excel-o
+      //-   p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
+  .row
+    .col-sm-12
+      .table-responsive
+        table.table(ng-if='viewEvent.loading')
+          tbody
+            tr
+              td
+                i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
+        table.table.table-bordered.table-hover(ng-if='viewEvent.event.days')
+          thead
+            tr.amet
+              th
+              th(ng-repeat='(key, day) in viewEvent.event.days track by $index', colspan='{{day.blocks.length}}') {{key}} Bloques
+            tr.amet
+              th Código
+              th(ng-repeat='(key, block) in viewEvent.blocks track by $index') {{block.start}} - {{block.end}}
+          tbody
+            tr(ng-repeat='(key, user) in viewEvent.excel track by $index')
+              td
+                i.fa.fa-qrcode
+                |  {{user[0].code}}
+              td(ng-repeat='info in viewEvent.blocks') {{user[$index].hour}}
