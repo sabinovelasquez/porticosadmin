@@ -7,11 +7,11 @@ section#login
         .input-group.mb-2.mr-sm-2.mb-sm-0
           .input-group-addon
             i.fa.fa-user
-          input.form-control(ng-model='login.user.email', type='text')
+          input.form-control(ng-model='login.user.email', type='text', placeholder='Ingrese email')
         .input-group.mb-2.mr-sm-2.mb-sm-0
           .input-group-addon
             i.fa.fa-key
-          input.form-control(ng-model='login.user.password', type='password')
+          input.form-control(ng-model='login.user.password', type='password', placeholder='Ingrese contraseña')
         button.btn.btn-primary(type='submit', value='Ingresar') Ingresar
     .col-sm-12
       .loading(ng-if='login.loading')
