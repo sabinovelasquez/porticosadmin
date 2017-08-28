@@ -9,6 +9,7 @@ const ngModule = angular.module('app', [
   'ui.bootstrap',
   'ui.router',
   'firebase',
+  'ngTableToCsv',
 ]);
 
 require('./config')(ngModule);
