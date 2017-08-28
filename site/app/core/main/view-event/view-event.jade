@@ -20,7 +20,9 @@ section#view-event
   .row
     .col-sm-12
       p(ng-if='viewEvent.loading')
-        
+      a.btn.btn-success(ng-click='csv.generate()', ng-href='{{csv.link()}}', download='{{viewEvent.event.title}}.csv', ng-if='viewEvent.event.days')
+        i.fa.fa-file-excel-o
+        |  Descargar
       //- p(ng-show='!viewEvent.event.registers && !viewEvent.loading') No hay registros para este evento.
       //- .registers(ng-if='viewEvent.event.registers')
       //-   p(ng-show='viewEvent.event.registers && !viewEvent.loading')
@@ -36,9 +38,6 @@ section#view-event
             tr
               td
                 i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
-        a.btn.btn-success(ng-click='csv.generate()', ng-href='{{csv.link()}}', download='{{viewEvent.event.title}}.csv', ng-if='viewEvent.event.days')
-          i.fa.fa-file-excel-o
-          |  Descargar
         table.table.table-bordered.table-hover(ng-if='viewEvent.event.days', export-csv='csv', separator=',')
           thead
             tr.amet
