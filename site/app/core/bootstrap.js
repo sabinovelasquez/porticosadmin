@@ -12,11 +12,6 @@ const ngModule = angular.module('app', [
   'ngTableToCsv',
 ]);
 
-require('./config')(ngModule);
-require('./controllers')(ngModule);
-require('./directives')(ngModule);
-require('./services')(ngModule);
-
 const firebaseConfig = {
   apiKey: 'AIzaSyD2yyAV6j40TlyQgg7d8tXZq0f8yaYpCbM',
   authDomain: 'porticos-18e1d.firebaseapp.com',
@@ -28,6 +23,12 @@ const firebaseConfig = {
 const firebase = require('firebase');
 
 firebase.initializeApp(firebaseConfig);
+
+require('./config')(ngModule);
+require('./controllers')(ngModule);
+require('./directives')(ngModule);
+require('./services')(ngModule);
+require('./factory')(ngModule);
 
 angular.element(document).ready(() => {
   angular.bootstrap(document, ['app'], {

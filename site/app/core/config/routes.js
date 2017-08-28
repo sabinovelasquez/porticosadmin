@@ -1,7 +1,16 @@
 export default ngModule => {
+  ngModule.run(
+    ($rootScope, $state) => {
+      $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
+        if (error === 'AUTH_REQUIRED') {
+          $state.go('login');
+        }
+      });
+    }
+  );
   ngModule.config(
     ($stateProvider, $urlRouterProvider) => {
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/login');
       $stateProvider
       .state('main', {
         url: '/',

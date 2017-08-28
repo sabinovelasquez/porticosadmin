@@ -4,4 +4,5 @@ export default ngModule => {
   require('./main/edit-event/edit-event')(ngModule);
   require('./main/view-event/view-event')(ngModule);
   require('./main/devices/devices')(ngModule);
+  require('./main/login/login')(ngModule);
 };
