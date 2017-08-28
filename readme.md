@@ -13,6 +13,7 @@ Clone or Fork this repo, and then run:
 ```sh
 $ cd site
 $ npm install
+$ bower install
 # Run
 $ npm start
 ```
