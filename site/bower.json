@@ -1,0 +1,21 @@
+{
+  "name": "webpack-boilerplate",
+  "description": "Starting point",
+  "main": "index.js",
+  "authors": [
+    "Sabino Velásquez <sabinovelasquez@gmail.com> (http://sabino.cl)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/sabinovelasquez/porticosadmin",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ng-table-to-csv": "^0.3.3"
+  }
+}
