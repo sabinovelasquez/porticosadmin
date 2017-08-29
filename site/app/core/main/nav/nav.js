@@ -7,6 +7,9 @@ export default ngModule => {
       scope: {},
       controllerAs: 'nav',
       controller: function navCtrl() {
+        Auth.$onAuthStateChanged( (data) => {
+          this.user = data.email;
+        });
         this.logOut = () => {
           Auth.$signOut().then( () => {
             $state.go('login');

@@ -5,4 +5,5 @@ export default ngModule => {
   require('./main/view-event/view-event')(ngModule);
   require('./main/devices/devices')(ngModule);
   require('./main/login/login')(ngModule);
+  require('./main/users/users')(ngModule);
 };

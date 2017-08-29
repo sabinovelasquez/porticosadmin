@@ -1,5 +1,5 @@
 export default ngModule => {
-  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(firebaseAPIService, $stateParams) {
+  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(currentAuth, firebaseAPIService, $stateParams) {
     this.eventKey = $stateParams.key;
     const __ = require('underscore');
     const moment = require('moment');

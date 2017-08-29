@@ -1,8 +1,8 @@
 export default ngModule => {
   ngModule.run(
-    ($rootScope, $state) => {
-      $rootScope.$on('$onAuthStateChanged', (event, toState, toParams, fromState, fromParams, error) => {
-        if (error === 'AUTH_REQUIRED') {
+    (Auth, $state) => {
+      Auth.$onAuthStateChanged( (data) => {
+        if (!data) {
           $state.go('login');
         }
       });
@@ -17,6 +17,12 @@ export default ngModule => {
         template: require('../main/login/login.jade'),
         controller: 'LoginCtrl',
         controllerAs: 'login',
+      })
+      .state('users', {
+        url: '/users',
+        template: require('../main/users/users.jade'),
+        controller: 'UsersCtrl',
+        controllerAs: 'users',
       })
       .state('main', {
         url: '/main',

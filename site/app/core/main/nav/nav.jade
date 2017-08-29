@@ -17,7 +17,15 @@
             a(ui-sref='devices')
               i.fa.fa-tablet
               |   Dispositivos
+          li
+            a(ui-sref='users')
+              i.fa.fa-users
+              |   Usuarios
         ul.nav.navbar-nav.navbar-right
+          li
+            a
+              i.fa.fa-user-circle
+              |  {{nav.user}}
           li
             a(ng-click='nav.logOut()')
               i.fa.fa-sign-out
