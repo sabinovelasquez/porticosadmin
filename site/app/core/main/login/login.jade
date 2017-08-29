@@ -1,0 +1,20 @@
+section#login
+  .container
+    .col-sm-12
+      h1 Login
+    .col-sm-12
+      form.form-inline(ng-submit='login.login()')
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon
+            i.fa.fa-user
+          input.form-control(ng-model='login.user.email', type='text', placeholder='Ingrese email')
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon
+            i.fa.fa-key
+          input.form-control(ng-model='login.user.password', type='password', placeholder='Ingrese contraseña')
+        button.btn.btn-primary(type='submit', value='Ingresar', ng-if='!login.loading') Ingresar
+        button.btn.btn-primary(ng-disabled, ng-if='login.loading')
+          i.fa.fa-spinner.fa-pulse
+    .col-sm-12(style='margin-top:20px;')
+      .alert.alert-danger(ng-if='login.error')
+        span {{login.error.message}}

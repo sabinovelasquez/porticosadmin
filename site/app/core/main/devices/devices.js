@@ -1,5 +1,6 @@
 export default ngModule => {
   ngModule.controller('DevicesCtrl', function DevicesCtrl(firebaseAPIService) {
+    const __ = require('underscore');
     firebaseAPIService.getDevices().then( (data) => {
       this.devices = data;
     });
@@ -9,6 +10,17 @@ export default ngModule => {
     });
     this.getDeviceEvent = (eventKey) => {
       return this.events[eventKey];
+    };
+    this.getBlocks = (eventKey) => {
+      const arr = [];
+      let size = 0;
+      __.map(this.events[eventKey].days, (item) => {
+        size += __.size(item.blocks);
+      });
+      for (let current = 0; current < size; current++) {
+        arr.push(current + 1);
+      }
+      return arr;
     };
     this.saveDevice = (key) => {
       this.loading = true;

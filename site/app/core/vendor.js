@@ -15,6 +15,7 @@ module.exports = () => {
   require('font-awesome-webpack');
   require('firebase');
   require('angularfire');
+  require('../../bower_components/ng-table-to-csv/dist/ng-table-to-csv');
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');
 };

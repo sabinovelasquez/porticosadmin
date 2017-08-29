@@ -1,5 +1,5 @@
 export default ngModule => {
-  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(firebaseAPIService, $stateParams) {
+  ngModule.controller('ViewEventCtrl', function ViewEventCtrl(currentAuth, firebaseAPIService, $stateParams) {
     this.eventKey = $stateParams.key;
     const __ = require('underscore');
     const moment = require('moment');
@@ -66,13 +66,44 @@ export default ngModule => {
         }
       });
       const orderArray = __.sortBy( finalTemp, ( item ) => { return item.event; } );
+      __.each(this.blocks, (block, key)  => {
+        orderArray[key].percent = this.timePercent(block.start, block.end, orderArray[key].hour);
+      });
       this.excel.push(orderArray);
     };
-    this.checkTime = (startTime, endTime, timeToCheck) => {
+    this.timePercent = (startTime, endTime, timeToCheck) => {
       const check = moment(timeToCheck, 'HH:mm');
       const start = moment(startTime, 'HH:mm');
       const end = moment(endTime, 'HH:mm');
-      return check.isBetween(start, end);
+      let percent = (check - start) / (end - start) * 100;
+      percent = (100 - percent);
+      if (percent > 100) {
+        percent = 100;
+      }
+      if (percent < 0) {
+        percent = 0;
+      }
+      if ( !isNaN(percent) ) {
+        return percent;
+      }
+    };
+    this.getPercentage = (user) => {
+      let percent = 0;
+      __.each(user, (data) => {
+        if (data.percent) {
+          percent += data.percent;
+        }
+      });
+      return (percent / user.length);
+    };
+    this.getPercentageTotal = (user) => {
+      let percent = 0;
+      __.each(user, (data) => {
+        if (data.percent) {
+          percent += 100;
+        }
+      });
+      return (percent / user.length);
     };
     firebaseAPIService.getDevices().then( (data) => {
       this.loading = false;

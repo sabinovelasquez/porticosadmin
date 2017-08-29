@@ -49,7 +49,6 @@
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
     "moment": "^2.18.1",
-    "ng-csv": "^0.3.6",
     "ng-parallax": "^1.0.1",
     "ng-resource": "^1.3.2",
     "ngtouch": "^1.0.1",
