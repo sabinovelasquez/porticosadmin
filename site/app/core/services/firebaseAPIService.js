@@ -3,6 +3,19 @@ export default ngModule => {
     const firebase = require('firebase');
     const firebaseClient = firebase.database().ref();
     const service = {
+      getUsers: () => {
+        const ref = firebaseClient.child('users');
+        const users = $firebaseObject(ref);
+        return users.$loaded();
+      },
+      storeUser: (uid, data) => {
+        const ref = firebaseClient.child(`users/${uid}`);
+        const newUser = $firebaseObject(ref);
+        newUser.$loaded().then(() => {
+          newUser.data = data;
+          return newUser.$save();
+        });
+      },
       getDevices: () => {
         const ref = firebaseClient.child('devices');
         const devices = $firebaseObject(ref);

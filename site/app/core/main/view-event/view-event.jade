@@ -39,7 +39,7 @@ section#view-event
             tr
               td
                 i.fa.fa-refresh.fa-spin.fa-2x.fa-fw
-        table.table.table-bordered.table-hover(ng-if='viewEvent.event.days', export-csv='csv', separator=',')
+        table.table.table-bordered.table-hover(ng-if='viewEvent.event.days', export-csv='csv', separator=';')
           thead
             tr.amet
               th(colspan='3')

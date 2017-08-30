@@ -1,7 +1,7 @@
 nav-bar
 .container
     .col-sm-12
-      h1 Crear usuarios
+      h1 Crear usuarios {{users.toShow}}
     .col-sm-12
       form.form-inline(ng-submit='users.createUser()')
         .input-group.mb-2.mr-sm-2.mb-sm-0
@@ -17,6 +17,14 @@ nav-bar
           i.fa.fa-spinner.fa-pulse
     .col-sm-12(style='margin-top:20px;')
       .alert.alert-success(ng-if='users.userCreated.email')
-        span Usuario creado: {{users.userCreated.email}}
+        span Usuario creado: {{users.userCreated.email}}.
       .alert.alert-danger(ng-if='users.error')
         span {{users.error.message}}
+    .col-sm-12
+      h2 Usuarios:
+      p(ng-if='!users.users')
+        i.fa.fa-spinner.fa-pulse
+      ul.user
+        li(ng-repeat = 'user in users.users')
+          i.fa.fa-user-circle
+          |  {{user.data.email}}
