@@ -23,6 +23,11 @@ export default ngModule => {
         template: require('../main/users/users.jade'),
         controller: 'UsersCtrl',
         controllerAs: 'users',
+        resolve: {
+          currentAuth: (Auth) => {
+            return Auth.$requireSignIn();
+          },
+        },
       })
       .state('main', {
         url: '/main',
