@@ -10,6 +10,7 @@ export default ngModule => {
     this.form = {};
     this.form.percent = 80;
     this.enabled = true;
+    this.confDel = false;
     this.startBlock = this.endBlock = '00:00';
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
       this.event = data;
@@ -101,6 +102,11 @@ export default ngModule => {
     this.archive = (bol) => {
       firebaseAPIService.archiveEvent(this.eventKey, bol);
       $state.go('main');
+    };
+    this.delete = () => {
+      firebaseAPIService.deleteEvent(this.eventKey).then( () => {
+        $state.go('main');
+      });
     };
     this.configDevices = () => {
       angular.forEach(this.devices, (device, key) => {
