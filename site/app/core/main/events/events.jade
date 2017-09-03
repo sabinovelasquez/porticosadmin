@@ -26,7 +26,7 @@ section#events
             .col-xs-4
               a.btn.btn-warning.pull-right(ui-sref='view-event({key:key})', tooltip-placement='left', uib-tooltip='Ver registros del Evento') 
                 i.fa.fa-table
-              a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})', tooltip-placement='left', uib-tooltip='Editar Evento')
+              a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})', tooltip-placement='left', uib-tooltip='Editar Evento', ng-if='key!="no-event"')
                 i.fa.fa-pencil-square-o
         .panel-body
           .content
