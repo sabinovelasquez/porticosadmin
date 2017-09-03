@@ -39,6 +39,11 @@ export default ngModule => {
           return setEvent.$save();
         });
       },
+      deleteEvent: (eventKey) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const deleteEvent = $firebaseObject(ref);
+        return deleteEvent.$remove();
+      },
       getEvent: (eventKey) => {
         const ref = firebaseClient.child(`events/${eventKey}`);
         const event = $firebaseObject(ref);

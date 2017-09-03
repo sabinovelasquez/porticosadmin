@@ -105,18 +105,30 @@ section#edit-event.container
         i.fa(ng-class='{"fa-square-o red":!editEvent.enabled, "fa-check-square-o green":editEvent.enabled}')
         small  Cree al menos 1 día para el evento.
       .icon
-        button.btn.btn-success(ng-click='editEvent.submitForm()', ng-disabled='!editEvent.event.title || !editEvent.event.percent || !editEvent.enabled || editEvent.sending')
+        a.btn.btn-success(ng-click='editEvent.submitForm()', ng-disabled='!editEvent.event.title || !editEvent.event.percent || !editEvent.enabled || editEvent.sending')
           | Modificar Evento  
           i.fa(ng-class='{"fa-send":!editEvent.sending, "fa-spinner fa-pulse":editEvent.sending}')
       .icon(ng-if='!editEvent.event.archived && editEvent.event.title')
-        button.btn.btn-danger(ng-click='editEvent.archive(true)')
+        a.btn.btn-danger(ng-click='editEvent.archive(true)')
           | Archivar Evento  
           i.fa.fa-archive
       .icon(ng-if='editEvent.event.archived && editEvent.event.title')
-        button.btn.btn-primary(ng-click='editEvent.archive(false)')
+        a.btn.btn-primary(ng-click='editEvent.archive(false)')
           | Restaurar Evento  
           i.fa.fa-archive
       .icon
-        button.btn.btn-default(ui-sref='main')
+        a.btn.btn-default(ui-sref='main')
           | Cancelar  
           i.fa.fa-ban
+    .col-sm-12
+      p
+        .icon(ng-if='editEvent.event.archived && editEvent.event.title')
+          a.btn.btn-danger(ng-if='!editEvent.confDel', ng-click='editEvent.confDel=!editEvent.confDel')
+            | Borrar Evento  
+            i.fa.fa-trash
+          a.btn.btn-danger(ng-if='editEvent.confDel', ng-click='editEvent.delete()')
+            | Realmente quiere borrar el Evento?  
+            i.fa.fa-trash
+    .col-sm-12(ng-if='editEvent.event.archived && editEvent.event.title')
+      p.red
+        small *Al eliminar un evento, se eliminarán todos sus asistentes.

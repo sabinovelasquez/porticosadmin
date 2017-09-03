@@ -7,7 +7,7 @@ section#view-event
   .row
     .col-sm-12
       .details
-        a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento')
+        a.btn.btn-warning(ui-sref='edit-event({key:viewEvent.eventKey})', tooltip-placement='right', uib-tooltip='Editar Evento', ng-if='viewEvent.eventKey!="no-event"')
           i.fa.fa-pencil-square-o
         a.btn.btn-default(ui-sref='main', tooltip-placement='right', uib-tooltip='Ver todos los Eventos')
           i.fa.fa-home
