@@ -1,6 +1,6 @@
 module.exports = () => {
-  require('bootstrap/dist/css/bootstrap.css');
-  require('angular-ui-bootstrap/dist/ui-bootstrap-csp.css');
+  // require('bootstrap/dist/css/bootstrap.css');
+  // require('angular-ui-bootstrap/dist/ui-bootstrap-csp.css');
   require('animate.css/animate.css');
   require('angular-material/angular-material.css');
   require('../index.scss');
