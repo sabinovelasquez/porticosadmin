@@ -1,10 +1,15 @@
-md-content.login-form(layout='row', layout-align='space-around', layout-padding='layout-padding')
-  md-card(flex='flex', flex-gt-sm='50', flex-gt-md='33')
+md-content.login-form(layout='row', layout-align='center center')
+  md-card(flex, flex-gt-sm='50', flex-gt-md='33')
     md-toolbar
-      .md-toolbar-tools
+      .md-toolbar-tools(flex, layout='column', layout-align='center center')
         h2
-          span Scanpad.net
+          .icon.logo
+        small SCANPAD
     md-card-content
+      
+      p(flex, layout='row', layout-align='center center')
+      p Inicia sesión
+      md-divider
       form(name='Form')
         md-input-container.md-block
           label Email
@@ -18,22 +23,6 @@ md-content.login-form(layout='row', layout-align='space-around', layout-padding=
             .my-message(ng-message='required') Ingresa contraseña.
         md-button.md-raised.md-primary(ng-disabled='!Form.$valid', ng-click='login.login()', ng-if='!login.loading') Login
         md-progress-circular(md-mode='indeterminate', md-diameter='20', ng-if='login.loading')
-    //- .col-sm-12
-    //-   h1 Login
-    //- .col-sm-12
-    //-   form.form-inline(ng-submit='login.login()')
-    //-     .input-group.mb-2.mr-sm-2.mb-sm-0
-    //-       .input-group-addon
-    //-         i.fa.fa-user
-    //-       input.form-control(ng-model='login.user.email', type='text', placeholder='Ingrese email')
-    //-     .input-group.mb-2.mr-sm-2.mb-sm-0
-    //-       .input-group-addon
-    //-         i.fa.fa-key
-    //-       input.form-control(ng-model='login.user.password', type='password', placeholder='Ingrese contraseña')
-    //-     md-button.md-accent.md-raised Ingresar
-    //-     button.btn.btn-primary(type='submit', value='Ingresar', ng-if='!login.loading') Ingresar
-    //-     button.btn.btn-primary(ng-disabled, ng-if='login.loading')
-    //-       i.fa.fa-spinner.fa-pulse
-    //- .col-sm-12(style='margin-top:20px;')
-    //-   .alert.alert-danger(ng-if='login.error')
-    //-     span {{login.error.message}}
+        small.warning(ng-if='login.error')
+          md-icon(md-colors='{color:"red"}') warning
+          span(md-colors='{color:"red"}') {{login.error.message}}

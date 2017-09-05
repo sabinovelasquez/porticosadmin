@@ -12,7 +12,7 @@ export default ngModule => {
     ($stateProvider, $urlRouterProvider, $mdThemingProvider) => {
       $mdThemingProvider.theme('default')
       .primaryPalette('pink')
-      .accentPalette('pink');
+      .accentPalette('indigo');
       $urlRouterProvider.otherwise('/login');
       $stateProvider
       .state('login', {
