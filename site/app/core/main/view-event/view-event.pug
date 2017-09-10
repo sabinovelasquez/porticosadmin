@@ -3,7 +3,7 @@ section#view-event
   h1
     .loading(ng-if='!viewEvent.event.title')
       i.fa.fa-spinner.fa-pulse
-    {{viewEvent.event.title}}
+    | {{viewEvent.event.title}}
   .row
     .col-sm-12
       .details
@@ -16,7 +16,7 @@ section#view-event
           i.fa.fa-spinner.fa-pulse
         .device(ng-repeat='(key, device) in viewEvent.devices')
           i.fa.fa-tablet
-          {{key | limitTo: -4}}
+          | {{key | limitTo: -4}}
   .row
     .col-sm-12
       p(ng-if='viewEvent.loading')

@@ -9,21 +9,22 @@ export default ngModule => {
     }
   );
   ngModule.config(
-    ($stateProvider, $urlRouterProvider, $mdThemingProvider) => {
+    ($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider) => {
       $mdThemingProvider.theme('default')
       .primaryPalette('pink')
       .accentPalette('indigo');
+      $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise('/login');
       $stateProvider
       .state('login', {
         url: '/login',
-        template: require('../main/login/login.jade'),
+        template: require('../main/login/login.pug'),
         controller: 'LoginCtrl',
         controllerAs: 'login',
       })
       .state('users', {
         url: '/users',
-        template: require('../main/users/users.jade'),
+        template: require('../main/users/users.pug'),
         controller: 'UsersCtrl',
         controllerAs: 'users',
         resolve: {
@@ -34,7 +35,7 @@ export default ngModule => {
       })
       .state('main', {
         url: '/main',
-        template: require('../main/main.jade'),
+        template: require('../main/main.pug'),
         controller: 'MainCtrl',
         controllerAs: 'main',
         resolve: {
@@ -45,7 +46,7 @@ export default ngModule => {
       })
       .state('new-event', {
         url: '/new-event',
-        template: require('../main/new-event/new-event.jade'),
+        template: require('../main/new-event/new-event.pug'),
         controller: 'NewEventCtrl',
         controllerAs: 'newEvent',
         resolve: {
@@ -56,7 +57,7 @@ export default ngModule => {
       })
       .state('edit-event', {
         url: '/edit-event/:key',
-        template: require('../main/edit-event/edit-event.jade'),
+        template: require('../main/edit-event/edit-event.pug'),
         controller: 'EditEventCtrl',
         controllerAs: 'editEvent',
         resolve: {
@@ -67,7 +68,7 @@ export default ngModule => {
       })
       .state('view-event', {
         url: '/view-event/:key',
-        template: require('../main/view-event/view-event.jade'),
+        template: require('../main/view-event/view-event.pug'),
         controller: 'ViewEventCtrl',
         controllerAs: 'viewEvent',
         resolve: {
@@ -78,7 +79,7 @@ export default ngModule => {
       })
       .state('devices', {
         url: '/devices',
-        template: require('../main/devices/devices.jade'),
+        template: require('../main/devices/devices.pug'),
         controller: 'DevicesCtrl',
         controllerAs: 'devices',
         resolve: {

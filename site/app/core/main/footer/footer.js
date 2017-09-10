@@ -3,7 +3,7 @@ export default ngModule => {
 
   ngModule.directive('mainFooter', function mainFooter() {
     return {
-      template: require('./footer.jade'),
+      template: require('./footer.pug'),
     };
   });
 };

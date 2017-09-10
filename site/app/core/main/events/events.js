@@ -2,7 +2,7 @@ export default ngModule => {
   require('./events.scss');
   ngModule.directive('events', function events(firebaseAPIService, $timeout) {
     return {
-      template: require('./events.jade'),
+      template: require('./events.pug'),
       scope: {},
       controllerAs: 'events',
       controller: function eventsCtrl() {

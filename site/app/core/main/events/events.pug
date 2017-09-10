@@ -37,22 +37,22 @@ section#events
             |  Dispositivos:  
             span(ng-if='!event.devices && event.devices!=0')
               i.fa.fa-spinner.fa-pulse
-            {{event.devices}}
+            | {{event.devices}}
           .content
             i.fa.fa-certificate
             |  Certificación:  
             span(ng-if='!event.percent && event.percent!=0')
               i.fa.fa-spinner.fa-pulse
-            {{event.percent}}%
+            | {{event.percent}}%
           .content
             i.fa.fa-users
             |  Asistentes:  
             span(ng-if='!event.users && event.users!=0')
               i.fa.fa-spinner.fa-pulse
-            {{event.users}}
+            | {{event.users}}
           .content
             i.fa.fa-qrcode
             |  Códigos escaneados:  
             span(ng-if='!event.scanned && event.scanned!=0')
               i.fa.fa-spinner.fa-pulse
-            {{event.scanned}}
+            | {{event.scanned}}

@@ -20,8 +20,8 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.jade$/,
-                loader: 'raw!jade-html'
+                test: /\.pug$/,
+                loader: 'raw!pug-html'
             },
             {
                 test: /\.scss$/,

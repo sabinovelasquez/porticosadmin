@@ -3,7 +3,7 @@ export default ngModule => {
 
   ngModule.directive('navBar', function navBar(Auth, $state) {
     return {
-      template: require('./nav.jade'),
+      template: require('./nav.pug'),
       scope: {},
       controllerAs: 'nav',
       controller: function navCtrl() {

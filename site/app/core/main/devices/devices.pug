@@ -19,7 +19,7 @@ section#devices
           p(ng-if='!devices.events')
             i.fa.fa-spinner.fa-pulse
           p(ng-if='devices.events')
-            {{devices.getDeviceEvent(device.settings.eventKey).title}}
+            | {{devices.getDeviceEvent(device.settings.eventKey).title}}
           p(ng-if='devices.events')
             a(ui-sref='edit-event({key:device.settings.eventKey})')
               i.fa.fa-pencil
