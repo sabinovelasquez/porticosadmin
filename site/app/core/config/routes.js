@@ -9,11 +9,10 @@ export default ngModule => {
     }
   );
   ngModule.config(
-    ($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider) => {
+    ($stateProvider, $urlRouterProvider, $mdThemingProvider) => {
       $mdThemingProvider.theme('default')
       .primaryPalette('pink')
       .accentPalette('indigo');
-      $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise('/login');
       $stateProvider
       .state('login', {
@@ -35,7 +34,7 @@ export default ngModule => {
       })
       .state('main', {
         url: '/main',
-        template: require('../main/main.pug'),
+        template: require('../main/main/main.pug'),
         controller: 'MainCtrl',
         controllerAs: 'main',
         resolve: {

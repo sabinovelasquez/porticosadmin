@@ -1,32 +1,36 @@
-.menu(du-scrollspy='top')
-  nav.navbar.navbar-default
-    .container-fluid
-      .navbar-header
-        button.mob-menu.navbar-toggle.collapsed(type='button', ng-click='navCollapsed=!navCollapsed')
-          i.fa.fa-navicon
-        .navbar-brand
-          .logo
-        .navbar-brand.pull-left.hidden-sm.hidden-md.hidden-lg
-      .collapse.navbar-collapse(ng-class='{"in":navCollapsed}')
-        ul.nav.navbar-nav
-          li
-            a(ui-sref='main')
-              i.fa.fa-home
-              |   Home
-          li
-            a(ui-sref='devices')
-              i.fa.fa-tablet
-              |   Dispositivos
-          li
-            a(ui-sref='users')
-              i.fa.fa-users
-              |   Usuarios
-        ul.nav.navbar-nav.navbar-right
-          li
-            a
-              i.fa.fa-user-circle
-              |  {{nav.user}}
-          li
-            a(ng-click='nav.logOut()')
-              i.fa.fa-sign-out
-              |   Cerrar sesión
+md-nav-bar(md-selected-nav-item='currentNavItem', nav-bar-aria-label='navigation')
+  md-nav-item(md-nav-click='goto("page1")' name="page1") Home
+  md-nav-item(md-nav-click='goto("page2")' name="page2") Dispositivos
+  md-nav-item(md-nav-click='goto("page3")' name="page3") Usuarios
+//- .menu(du-scrollspy='top')
+//-   nav.navbar.navbar-default
+//-     .container-fluid
+//-       .navbar-header
+//-         button.mob-menu.navbar-toggle.collapsed(type='button', ng-click='navCollapsed=!navCollapsed')
+//-           i.fa.fa-navicon
+//-         .navbar-brand
+//-           .logo
+//-         .navbar-brand.pull-left.hidden-sm.hidden-md.hidden-lg
+//-       .collapse.navbar-collapse(ng-class='{"in":navCollapsed}')
+//-         ul.nav.navbar-nav
+//-           li
+//-             a(ui-sref='main')
+//-               i.fa.fa-home
+//-               |   Home
+//-           li
+//-             a(ui-sref='devices')
+//-               i.fa.fa-tablet
+//-               |   Dispositivos
+//-           li
+//-             a(ui-sref='users')
+//-               i.fa.fa-users
+//-               |   Usuarios
+//-         ul.nav.navbar-nav.navbar-right
+//-           li
+//-             a
+//-               i.fa.fa-user-circle
+//-               |  {{nav.user}}
+//-           li
+//-             a(ng-click='nav.logOut()')
+//-               i.fa.fa-sign-out
+//-               |   Cerrar sesión

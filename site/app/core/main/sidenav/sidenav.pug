@@ -1,0 +1,15 @@
+md-sidenav.main-sidenav.md-sidenav-left( md-component-id='left',
+                            layout='column',
+                            md-is-locked-open='$mdMedia("gt-md")',
+                            md-whiteframe='{{sideNav.whiteframe}}')
+  md-content(md-scroll-y, flex, layout='column')
+    md-sidemenu(locked='true')
+      md-sidemenu-group
+        md-subheader.md-no-sticky Caption
+      md-sidemenu-group(ng-repeat='item in sideNav.menu')
+        md-divider
+        md-subheader.md-no-sticky Title?
+        md-sidemenu-button
+          a(ui-sref='{{item.uiref}}')
+            | Button title
+            md-icon {{item.icon}}

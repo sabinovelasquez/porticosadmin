@@ -11,6 +11,7 @@ module.exports = () => {
   require('firebase');
   require('angularfire');
   require('angular-material');
+  require('angular-material-sidemenu');
   require('../../bower_components/ng-table-to-csv/dist/ng-table-to-csv');
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');
