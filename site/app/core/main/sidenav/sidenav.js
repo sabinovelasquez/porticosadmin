@@ -13,16 +13,19 @@ export default ngModule => {
             title: 'Home',
             uiref: 'main',
             icon: 'home',
+            desc: 'Descripción',
           },
           {
             title: 'Dispositivos',
             uiref: 'devices',
             icon: 'android',
+            desc: 'Descripción',
           },
           {
             title: 'Usuarios',
             uiref: 'users',
             icon: 'users',
+            desc: 'Descripción',
           },
         ];
       },

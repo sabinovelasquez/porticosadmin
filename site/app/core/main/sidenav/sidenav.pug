@@ -3,6 +3,8 @@ md-sidenav.main-sidenav.md-sidenav-left( md-component-id='left',
                             md-is-locked-open='$mdMedia("gt-md")',
                             md-whiteframe='{{sideNav.whiteframe}}')
   md-content(md-scroll-y, flex, layout='column')
-    md-button.md-primary.md-raised.md-button.layout-column(ui-sref='{{item.uiref}}', ng-repeat='item in sideNav.menu')
-      | {{item.title}}
+    md-list-item.md-2-line(ui-sref='{{item.uiref}}', ng-repeat='item in sideNav.menu')
       md-icon {{item.icon}}
+      .md-list-item-text
+        h3 {{item.title}}
+        p {{item.desc}}
