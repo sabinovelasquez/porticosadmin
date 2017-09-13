@@ -1,7 +1,9 @@
-md-sidenav.main-sidenav.md-sidenav-left( md-component-id='left',
+md-sidenav.main-sidenav.md-sidenav-left(md-component-id='left',
                             layout='column',
-                            md-is-locked-open='$mdMedia("gt-md")')
+                            md-is-locked-open='$mdMedia("gt-sm")')
   md-content(md-scroll-y, flex, layout='column')
+    md-toolbar
+      h2 Scanpad
     md-list-item.md-2-line(ng-repeat='item in sideNav.menu', ui-sref='{{item.uiref}}', md-colors='{background:"primary"}')
       md-divider
       md-button.md-icon-button
@@ -9,3 +11,8 @@ md-sidenav.main-sidenav.md-sidenav-left( md-component-id='left',
       .md-list-item-text
         h3 {{item.title}}
         p {{item.desc}}
+md-content.icons(md-scroll-y, flex, layout='column', hide-gt-sm)
+  md-list-item.md-2-line(ng-repeat='item in sideNav.menu', ui-sref='{{item.uiref}}', md-colors='{background:"primary"}')
+      md-divider
+      md-button.md-icon-button
+        md-icon {{item.icon}}
