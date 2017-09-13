@@ -12,19 +12,19 @@ export default ngModule => {
             title: 'Home',
             uiref: 'main',
             icon: 'home',
-            desc: 'Descripción',
+            desc: 'Vista general de Eventos',
           },
           {
             title: 'Dispositivos',
             uiref: 'devices',
             icon: 'android',
-            desc: 'Descripción',
+            desc: 'Dispositivos con la App instalada',
           },
           {
             title: 'Usuarios',
             uiref: 'users',
             icon: 'contacts',
-            desc: 'Descripción',
+            desc: 'Lista de usuarios del sistema',
           },
         ];
       },
