@@ -1,30 +1,32 @@
-nav-bar
-.container
-    .col-sm-12
-      h1 Crear usuarios {{users.toShow}}
-    .col-sm-12
-      form.form-inline(ng-submit='users.createUser()')
-        .input-group.mb-2.mr-sm-2.mb-sm-0
-          .input-group-addon
-            i.fa.fa-user
-          input.form-control(ng-model='users.user.email', type='text', placeholder='Ingrese email', name='new user')
-        .input-group.mb-2.mr-sm-2.mb-sm-0
-          .input-group-addon
-            i.fa.fa-key
-          input.form-control(ng-model='users.user.password', type='password', placeholder='Ingrese contraseña', name='new email')
-        button.btn.btn-primary(type='submit', value='Ingresar', ng-if='!users.loading') Crear usuario
-        button.btn.btn-primary(ng-disabled, ng-if='users.loading')
-          i.fa.fa-spinner.fa-pulse
-    .col-sm-12(style='margin-top:20px;')
-      .alert.alert-success(ng-if='users.userCreated.email')
-        span Usuario creado: {{users.userCreated.email}}.
-      .alert.alert-danger(ng-if='users.error')
-        span {{users.error.message}}
-    .col-sm-12
-      h2 Usuarios:
-      p(ng-if='!users.users')
-        i.fa.fa-spinner.fa-pulse
-      ul.user
-        li(ng-repeat = 'user in users.users')
-          i.fa.fa-user-circle
-          |  {{user.data.email}}
+section(layout='row', flex)
+  side-nav.fixed(md-colors='{background:"primary"}')
+  md-content(flex, layout-padding)
+    .container
+        .col-sm-12
+          h1 Crear usuarios {{users.toShow}}
+        .col-sm-12
+          form.form-inline(ng-submit='users.createUser()')
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon
+                i.fa.fa-user
+              input.form-control(ng-model='users.user.email', type='text', placeholder='Ingrese email', name='new user')
+            .input-group.mb-2.mr-sm-2.mb-sm-0
+              .input-group-addon
+                i.fa.fa-key
+              input.form-control(ng-model='users.user.password', type='password', placeholder='Ingrese contraseña', name='new email')
+            button.btn.btn-primary(type='submit', value='Ingresar', ng-if='!users.loading') Crear usuario
+            button.btn.btn-primary(ng-disabled, ng-if='users.loading')
+              i.fa.fa-spinner.fa-pulse
+        .col-sm-12(style='margin-top:20px;')
+          .alert.alert-success(ng-if='users.userCreated.email')
+            span Usuario creado: {{users.userCreated.email}}.
+          .alert.alert-danger(ng-if='users.error')
+            span {{users.error.message}}
+        .col-sm-12
+          h2 Usuarios:
+          p(ng-if='!users.users')
+            i.fa.fa-spinner.fa-pulse
+          ul.user
+            li(ng-repeat = 'user in users.users')
+              i.fa.fa-user-circle
+              |  {{user.data.email}}

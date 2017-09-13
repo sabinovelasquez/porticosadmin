@@ -1,56 +1,58 @@
-nav-bar
-section#devices
-  h1 Dispositivos
-  .row
-    .col-sm-6.col-lg-4.loading(ng-if='!devices.devices')
-      i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
-    .col-sm-4(ng-repeat='(key, device) in devices.devices')
-      .panel.panel-default
-        .panel-heading
-          .row
-            .col-xs-10
-              h3
-                i.fa.fa-tablet
-                |  {{key | limitTo: -4}}
-            .col-xs-2
-              h3
-                i.fa.fa-cogs
-        .panel-body
-          p(ng-if='!devices.events')
-            i.fa.fa-spinner.fa-pulse
-          p(ng-if='devices.events')
-            | {{devices.getDeviceEvent(device.settings.eventKey).title}}
-          p(ng-if='devices.events')
-            a(ui-sref='edit-event({key:device.settings.eventKey})')
-              i.fa.fa-pencil
-              |  editar evento 
-          p(ng-if='devices.events')
-            a(ui-sref='view-event({key:device.settings.eventKey})')
-              i.fa.fa-link
-              |  ver evento 
-          form(ng-submit='devices.saveDevice(key)', ng-if='devices.events')
-            .input-group
-              .input-group-addon
-                i.fa.fa-th-large
-              select.form-control(ng-model='device.settings.event')
-                option(ng-repeat='option in devices.getBlocks(device.settings.eventKey)') Bloque {{option}}
-            .input-group
-              .input-group-addon
-                i.fa.fa-clock-o
-              input.form-control(type='text', ng-model='device.settings.eventHour')
-            .input-group
-              .input-group-addon
-                 i.fa.fa-thumb-tack
-              input.form-control(type='text', ng-model='device.settings.where')
-            .input-group
-              .input-group-addon
-                i.fa.fa-commenting-o
-              input.form-control(type='text', ng-model='device.settings.note')
-            .input-group(ng-if='!devices.loading')
-              button.btn.btn-success(type='submit')
-                | Grabar  
-                i.fa.fa-floppy-o
-            .input-group(ng-if='devices.loading')
-              button.btn.btn-default(type='submit', ng-disabled='true')
+section(layout='row', flex)
+  side-nav.fixed(md-colors='{background:"primary"}')
+  md-content(flex, layout-padding)
+    section#devices
+      h1 Dispositivos
+      .row
+        .col-sm-6.col-lg-4.loading(ng-if='!devices.devices')
+          i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
+        .col-sm-4(ng-repeat='(key, device) in devices.devices')
+          .panel.panel-default
+            .panel-heading
+              .row
+                .col-xs-10
+                  h3
+                    i.fa.fa-tablet
+                    |  {{key | limitTo: -4}}
+                .col-xs-2
+                  h3
+                    i.fa.fa-cogs
+            .panel-body
+              p(ng-if='!devices.events')
                 i.fa.fa-spinner.fa-pulse
-        .panel-footer
+              p(ng-if='devices.events')
+                | {{devices.getDeviceEvent(device.settings.eventKey).title}}
+              p(ng-if='devices.events')
+                a(ui-sref='edit-event({key:device.settings.eventKey})')
+                  i.fa.fa-pencil
+                  |  editar evento 
+              p(ng-if='devices.events')
+                a(ui-sref='view-event({key:device.settings.eventKey})')
+                  i.fa.fa-link
+                  |  ver evento 
+              form(ng-submit='devices.saveDevice(key)', ng-if='devices.events')
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-th-large
+                  select.form-control(ng-model='device.settings.event')
+                    option(ng-repeat='option in devices.getBlocks(device.settings.eventKey)') Bloque {{option}}
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-clock-o
+                  input.form-control(type='text', ng-model='device.settings.eventHour')
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-thumb-tack
+                  input.form-control(type='text', ng-model='device.settings.where')
+                .input-group
+                  .input-group-addon
+                    i.fa.fa-commenting-o
+                  input.form-control(type='text', ng-model='device.settings.note')
+                .input-group(ng-if='!devices.loading')
+                  button.btn.btn-success(type='submit')
+                    | Grabar  
+                    i.fa.fa-floppy-o
+                .input-group(ng-if='devices.loading')
+                  button.btn.btn-default(type='submit', ng-disabled='true')
+                    i.fa.fa-spinner.fa-pulse
+            .panel-footer

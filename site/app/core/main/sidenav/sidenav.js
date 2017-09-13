@@ -7,7 +7,6 @@ export default ngModule => {
       scope: {},
       controllerAs: 'sideNav',
       controller: function sideNavCtrl() {
-        this.whiteframe = '1';
         this.menu = [
           {
             title: 'Home',
@@ -24,7 +23,7 @@ export default ngModule => {
           {
             title: 'Usuarios',
             uiref: 'users',
-            icon: 'users',
+            icon: 'contacts',
             desc: 'Descripción',
           },
         ];

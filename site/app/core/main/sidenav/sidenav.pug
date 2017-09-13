@@ -1,10 +1,11 @@
 md-sidenav.main-sidenav.md-sidenav-left( md-component-id='left',
                             layout='column',
-                            md-is-locked-open='$mdMedia("gt-md")',
-                            md-whiteframe='{{sideNav.whiteframe}}')
+                            md-is-locked-open='$mdMedia("gt-md")')
   md-content(md-scroll-y, flex, layout='column')
-    md-list-item.md-2-line(ui-sref='{{item.uiref}}', ng-repeat='item in sideNav.menu')
-      md-icon {{item.icon}}
+    md-list-item.md-2-line(ng-repeat='item in sideNav.menu', ui-sref='{{item.uiref}}', md-colors='{background:"primary"}')
+      md-divider
+      md-button.md-icon-button
+        md-icon {{item.icon}}
       .md-list-item-text
         h3 {{item.title}}
         p {{item.desc}}
