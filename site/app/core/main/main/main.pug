@@ -1,6 +1,9 @@
-section(layout='row', flex)
-  side-nav.fixed(md-colors='{background:"primary"}')
+side-nav.fixed
+section(layout='column', flex)
+  md-toolbar(layout='row', layout-align='start center')
+    section(layout='row', layout-align='center center', hide-gt-sm)
+      md-button.md-hue-2.md-icon-button.md-mini(ng-click='main.mdServices.toggleSidenav("left")')
+        md-icon menu
+    .logo(hide-gt-sm)
   md-content(flex, layout-padding)
-    md-button(ng-click='main.mdServices.toggleSidenav("left")', hide-gt-sm)
-      md-icon menu
     events

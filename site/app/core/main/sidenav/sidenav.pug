@@ -1,9 +1,9 @@
 md-sidenav.main-sidenav.md-sidenav-left(md-component-id='left',
                             layout='column',
                             md-is-locked-open='$mdMedia("gt-sm")')
-  md-content(md-scroll-y, flex, layout='column', md-colors='{background:"primary"}')
+  md-content(md-scroll-y, flex, layout='column')
     md-toolbar
-      h2 Scanpad
+      .logo
     md-list-item.md-2-line(ng-repeat='item in sideNav.menu', ui-sref='{{item.uiref}}')
       md-divider
       md-button.md-icon-button
