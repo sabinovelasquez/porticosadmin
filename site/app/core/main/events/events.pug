@@ -1,4 +1,4 @@
-section#events
+.events(flex-xs, flex-gt-xs='50', layout='column')
   .show.pull-right(ng-click='events.showArchived=!events.showArchived')
     span Mostrar archivados
     br
@@ -16,43 +16,39 @@ section#events
             i.fa.fa-plus
     .col-sm-6.col-lg-4.loading(ng-if='!events.events')
       i.fa.fa-refresh.fa-spin.fa-3x.fa-fw
-    .col-sm-6.col-lg-4.jump(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
-      .panel.panel-default(ng-class='{"grey":event.archived}')
-        .panel-heading
-          .row
-            .col-xs-8
-              i.fa.fa-building
-              |  {{event.title}}
-            .col-xs-4
-              a.btn.btn-warning.pull-right(ui-sref='view-event({key:key})', tooltip-placement='left', uib-tooltip='Ver registros del Evento') 
-                i.fa.fa-table
-              a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})', tooltip-placement='left', uib-tooltip='Editar Evento', ng-if='key!="no-event"')
-                i.fa.fa-pencil-square-o
-        .panel-body
-          .content
-            i.fa.fa-calendar
-            |  Días: {{events.getLength(event.days)}}
-          .content
-            i.fa.fa-tablet
-            |  Dispositivos:  
-            span(ng-if='!event.devices && event.devices!=0')
-              i.fa.fa-spinner.fa-pulse
-            | {{event.devices}}
-          .content
-            i.fa.fa-certificate
-            |  Certificación:  
-            span(ng-if='!event.percent && event.percent!=0')
-              i.fa.fa-spinner.fa-pulse
-            | {{event.percent}}%
-          .content
-            i.fa.fa-users
-            |  Asistentes:  
-            span(ng-if='!event.users && event.users!=0')
-              i.fa.fa-spinner.fa-pulse
-            | {{event.users}}
-          .content
-            i.fa.fa-qrcode
-            |  Códigos escaneados:  
-            span(ng-if='!event.scanned && event.scanned!=0')
-              i.fa.fa-spinner.fa-pulse
-            | {{event.scanned}}
+  md-card(ng-repeat='(key, event) in events.events', ng-if='!event.archived || events.showArchived')
+    md-card-content(ng-class='{"grey":event.archived}')
+      h2 {{event.title}}
+      p Días: {{events.getLength(event.days)}}
+        //- .col-xs-4
+        //-   a.btn.btn-warning.pull-right(ui-sref='view-event({key:key})', tooltip-placement='left', uib-tooltip='Ver registros del Evento') 
+        //-     i.fa.fa-table
+        //-   a.btn.btn-warning.pull-right(ui-sref='edit-event({key:key})', tooltip-placement='left', uib-tooltip='Editar Evento', ng-if='key!="no-event"')
+        //-     i.fa.fa-pencil-square-o
+  //- .panel-body
+  //-   .content
+  //-     i.fa.fa-calendar
+  //-   .content
+  //-     i.fa.fa-tablet
+  //-     |  Dispositivos:  
+  //-     span(ng-if='!event.devices && event.devices!=0')
+  //-       i.fa.fa-spinner.fa-pulse
+  //-     | {{event.devices}}
+  //-   .content
+  //-     i.fa.fa-certificate
+  //-     |  Certificación:  
+  //-     span(ng-if='!event.percent && event.percent!=0')
+  //-       i.fa.fa-spinner.fa-pulse
+  //-     | {{event.percent}}%
+  //-   .content
+  //-     i.fa.fa-users
+  //-     |  Asistentes:  
+  //-     span(ng-if='!event.users && event.users!=0')
+  //-       i.fa.fa-spinner.fa-pulse
+  //-     | {{event.users}}
+  //-   .content
+  //-     i.fa.fa-qrcode
+  //-     |  Códigos escaneados:  
+  //-     span(ng-if='!event.scanned && event.scanned!=0')
+  //-       i.fa.fa-spinner.fa-pulse
+  //-     | {{event.scanned}}
