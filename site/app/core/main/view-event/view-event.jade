@@ -64,8 +64,9 @@ section#view-event
                 |  {{key}}
               td {{fileContent[key].firstname}}
               td {{fileContent[key].lastname}}
-              td(ng-repeat='(id, hours) in viewEvent.blocks track by $index')
-                span {{viewEvent.getInfo(user, hours, $index)}}
+              td(ng-repeat='(id, hour) in viewEvent.blocks track by $index')
+                div(ng-init='detail=viewEvent.getInfo(user, hour)') {{detail.where}} <br> {{detail.hour}} <br> {{detail.percent | limitTo: 5}}
+                  span(ng-show='detail.percent') %
                 //- span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
               td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
               td.text-right {{viewEvent.getPercentageTotal(user)}}%

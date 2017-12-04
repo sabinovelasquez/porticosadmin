@@ -7,13 +7,58 @@
 @import './core/main/view-event/view-event';
 @import './core/main/devices/devices';
 
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500);
 
-.logo{
-  width: 35px;
-  height: 40px;
-  background-size: contain;
+body,
+html{
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+}
+h1,
+h2{
+  font-weight: 300;
+  text-transform: uppercase;
+}
+section{
+  width: 90%;
   margin: auto;
-  background-repeat: no-repeat;
-  background-position: center;
+}
+a{
+  cursor: pointer;
+}
+.red{
+  color: $red;
+}
+.green{
+  color: $green;
+}
+.mr-sm-2 {
+  margin-right: .5rem;
+}
+
+.glyphicon{
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  display: inline-block;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-down{
+  &:before{
+    content: '\f078';
+  }
+}
+.glyphicon-chevron-up{
+  &:before{
+    content: '\f077';
+  }
+}
+.glyphicon-chevron-left:before{
+  content: '\f053';
+}
+.glyphicon-chevron-right:before{
+  content: '\f054';
 }

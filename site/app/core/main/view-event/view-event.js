@@ -4,8 +4,6 @@ export default ngModule => {
     const __ = require('underscore');
     const moment = require('moment');
     this.loading = true;
-    this.excel = {};
-    this.preExcel = {};
     this.devices = {};
     this.blocks = [];
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
@@ -16,22 +14,36 @@ export default ngModule => {
       __.each(this.eventDates, (block) => {
         const arr = block[0].blocks;
         for (let index = 0; index < arr.length; index++) {
-          this.blocks.push({start: arr[index].start, end: arr[index].end, date: block[0].date});
+          this.blocks.push({start: arr[index].start, end: arr[index].end, date: block[0].date, event: `Bloque ${index + 1}`});
         }
       });
-      this.getInfo = (arr, hour, index) => {
-        const time = moment(this.blocks[index].date, 'DD-MM-YYYY');
-        return arr;
+      this.getInfo = (arr, hour) => {
+        const block = hour.event;
+        let date = moment(new Date(hour.date)).format('DD-MM-YYYY');
+        const splitDate = date.split('-');
+        date = `${parseInt(splitDate[0], 10)}-${splitDate[1]}-${splitDate[2]}`;
+        const filter = __.uniq(arr, 'event');
+        let response = '-';
+        if (filter) {
+          response = __.where(filter, {event: block, date: date});
+          if (response[0]) {
+            response[0] = {
+              where: response[0].where,
+              hour: response[0].hour,
+              percent: this.timePercent(hour.start, hour.end, response[0].hour),
+            };
+          }
+        }
+        return response[0];
       };
       this.users = __.groupBy(registers, 'code');
-      __.each(this.users, (user, key) => {
+      __.each(this.users, (user) => {
         const group = __.groupBy(user, 'date');
         const finalGroup = [];
         __.map(group, (innerData) => {
           const arr = __.uniq(innerData, 'event');
           finalGroup.push(arr);
         });
-        this.preExcel[key] = finalGroup;
       });
     });
 
