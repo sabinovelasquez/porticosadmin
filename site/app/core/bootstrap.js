@@ -4,7 +4,6 @@ const ngModule = angular.module('app', [
   'duScroll',
   'ngAnimate',
   'ngParallax',
-  'ngSanitize',
   'ngTouch',
   'ui.bootstrap',
   'ui.router',
