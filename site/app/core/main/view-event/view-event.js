@@ -4,49 +4,73 @@ export default ngModule => {
     const __ = require('underscore');
     const moment = require('moment');
     this.loading = true;
+    this.excel = [];
     this.devices = {};
     this.blocks = [];
+    this.bLockNums = [];
     firebaseAPIService.getEvent(this.eventKey).then( (data) => {
       this.event = data;
-      const registers = data.registers;
-      const days = this.event.days;
-      this.eventDates = __.groupBy(days, 'date');
-      __.each(this.eventDates, (block) => {
-        const arr = block[0].blocks;
-        for (let index = 0; index < arr.length; index++) {
-          this.blocks.push({start: arr[index].start, end: arr[index].end, date: block[0].date, event: `Bloque ${index + 1}`});
-        }
-      });
-      this.getInfo = (arr, hour) => {
-        const block = hour.event;
-        let date = moment(new Date(hour.date)).format('DD-MM-YYYY');
-        const splitDate = date.split('-');
-        date = `${parseInt(splitDate[0], 10)}-${splitDate[1]}-${splitDate[2]}`;
-        const filter = __.uniq(arr, 'event');
-        let response = '-';
-        if (filter) {
-          response = __.where(filter, {event: block, date: date});
-          if (response[0]) {
-            response[0] = {
-              where: response[0].where,
-              hour: response[0].hour,
-              percent: this.timePercent(hour.start, hour.end, response[0].hour),
-            };
-          }
-        }
-        return response[0];
-      };
-      this.users = __.groupBy(registers, 'code');
-      __.each(this.users, (user) => {
-        const group = __.groupBy(user, 'date');
-        const finalGroup = [];
-        __.map(group, (innerData) => {
-          const arr = __.uniq(innerData, 'event');
-          finalGroup.push(arr);
+      __.each(this.event.days, (day, key) => {
+        const date = key;
+        __.each(day.blocks, (block) => {
+          this.blocks.push({date: date, start: block.start, end: block.end});
         });
       });
+      this.registers = data.registers;
+      this.groupUsers();
     });
-
+    this.groupUsers = () => {
+      this.users = __.groupBy(this.registers, 'code');
+      __.each(this.users, (user, key) => {
+        const userObj = {};
+        const data = __.groupBy(user, 'date');
+        userObj[key] = {data};
+        this.processUser(userObj[key], key);
+      });
+    };
+    this.processUser = (userData, id) => {
+      const temp = [];
+      const finalTemp = [];
+      __.each(userData.data, (user) => {
+        const dates = __.uniq(user, 'event');
+        __.each(dates, (info) => {
+          temp.push({
+            code: id,
+            date: info.date,
+            event: info.event,
+            hour: info.hour,
+          });
+        });
+      });
+      let comp = 0;
+      this.bLockNums = [];
+      __.each(this.blocks, (block, numKey) => {
+        this.bLockNums.push(numKey);
+      });
+      __.each(this.blocks, (block, key)  => {
+        if (temp[key]) {
+          finalTemp.push(temp[key]);
+          const str = temp[key].event.split(' ');
+          const toRem = __.indexOf(this.bLockNums, (str[1] - 1));
+          this.bLockNums.splice(toRem, 1);
+        } else {
+          comp = this.bLockNums[0];
+          const toRem = __.indexOf(this.bLockNums, comp);
+          this.bLockNums.splice(toRem, 1);
+          finalTemp.push({
+            code: id,
+            date: '-',
+            event: `Bloque ${comp + 1}`,
+            hour: '-',
+          });
+        }
+      });
+      const orderArray = __.sortBy( finalTemp, ( item ) => { return item.event; } );
+      __.each(this.blocks, (block, key)  => {
+        orderArray[key].percent = this.timePercent(block.start, block.end, orderArray[key].hour);
+      });
+      this.excel.push(orderArray);
+    };
     this.timePercent = (startTime, endTime, timeToCheck) => {
       const check = moment(timeToCheck, 'HH:mm');
       const start = moment(startTime, 'HH:mm');

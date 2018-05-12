@@ -49,7 +49,7 @@ section#view-event
               th.text-center Código
               th.text-center Nombre
               th.text-center Apellido
-              th.text-center(ng-repeat='(key, block) in viewEvent.blocks track by key') {{block.start}} - {{block.end}}
+              th.text-center(ng-repeat='(key, block) in viewEvent.blocks track by $index') {{block.start}} - {{block.end}}
               th.text-center
                 i.fa.fa-percent
                 |  Horas asistidas
@@ -58,33 +58,16 @@ section#view-event
                 |  Asistencia bloques
               th.text-center APRV / RECH
           tbody
-            tr(ng-repeat='(key, user) in viewEvent.users track by $index')
+            tr(ng-repeat='(key, user) in viewEvent.excel track by $index')
               td
                 i.fa.fa-qrcode
-                |  {{key}}
-              td {{fileContent[key].firstname}}
-              td {{fileContent[key].lastname}}
-              td(ng-repeat='(id, hour) in viewEvent.blocks track by $index')
-                div(ng-init='detail=viewEvent.getInfo(user, hour)') {{detail.where}} <br> {{detail.hour}} <br> {{detail.percent | limitTo: 5}}
-                  span(ng-show='detail.percent >= 0') %
-                //- span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
-              td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}% {{user}}
+                |  {{user[0].code}}
+              td {{fileContent[user[0].code].firstname}}
+              td {{fileContent[user[0].code].lastname}}
+              td(ng-repeat='info in viewEvent.blocks')
+                span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
+              td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
               td.text-right {{viewEvent.getPercentageTotal(user)}}%
               td.text-center
                 i.fa(ng-class='viewEvent.getPercentage(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
                 i.fa(ng-class='viewEvent.getPercentageTotal(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
-
-          //- tbody
-          //-   tr(ng-repeat='(key, user) in viewEvent.excel track by $index')
-          //-     td
-          //-       i.fa.fa-qrcode
-          //-       |  {{user[0].code}}
-          //-     td {{fileContent[user[0].code].firstname}}
-          //-     td {{fileContent[user[0].code].lastname}}
-          //-     td(ng-repeat='info in viewEvent.blocks')
-          //-       span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
-          //-     td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
-          //-     td.text-right {{viewEvent.getPercentageTotal(user)}}%
-          //-     td.text-center
-          //-       i.fa(ng-class='viewEvent.getPercentage(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
-          //-       i.fa(ng-class='viewEvent.getPercentageTotal(user) >= viewEvent.event.percent ? "fa-check green":"fa-times red"')
