@@ -13,12 +13,12 @@ const ngModule = angular.module('app', [
 ]);
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD2yyAV6j40TlyQgg7d8tXZq0f8yaYpCbM',
-  authDomain: 'porticos-18e1d.firebaseapp.com',
-  databaseURL: 'https://porticos-18e1d.firebaseio.com',
-  projectId: 'porticos-18e1d',
-  storageBucket: 'porticos-18e1d.appspot.com',
-  messagingSenderId: '578629257790',
+  apiKey: 'AIzaSyDRRYHq8O9M_LZmiKVWmc8eOL83LbK0S5I',
+  authDomain: 'scanpad-net.firebaseapp.com',
+  databaseURL: 'https://scanpad-net.firebaseio.com',
+  projectId: 'scanpad-net',
+  storageBucket: '',
+  messagingSenderId: '201822480848',
 };
 const firebase = require('firebase');
 
