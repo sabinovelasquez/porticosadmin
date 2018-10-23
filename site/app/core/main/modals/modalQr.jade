@@ -2,10 +2,15 @@
   button.close(type='button', ng-click='modalQrCode.close()')
     i.fa.fa-times
   h4.modal-title QR CODE
-.modal-body
+.modal-body(print-section)
   .row
     .col-xs-4
       img.qr.image-responsive(ng-src='{{modalQrCode.qr}}')
     .col-xs-8
       h2.qrcode-title {{modalQrCode.user.firstname}} {{modalQrCode.user.lastname}}
-      h3 {{modalQrCode.eventName}}
+      //- h3 {{modalQrCode.eventName}}
+.modal-footer
+  .row.text-center
+    button.btn.btn-success(print-btn)
+      | Imprimir  
+      i.fa.fa-print

@@ -9,6 +9,7 @@ const ngModule = angular.module('app', [
   'ui.router',
   'firebase',
   'ngTableToCsv',
+  'AngularPrint',
 ]);
 
 const firebaseConfig = {

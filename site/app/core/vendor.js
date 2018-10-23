@@ -1,6 +1,7 @@
 module.exports = () => {
   require('bootstrap/dist/css/bootstrap.css');
   require('angular-ui-bootstrap/dist/ui-bootstrap-csp.css');
+  require('../../bower_components/angularPrint/angularPrint.css');
   require('animate.css/animate.css');
   require('../index.scss');
 
@@ -16,6 +17,7 @@ module.exports = () => {
   require('firebase');
   require('angularfire');
   require('../../bower_components/ng-table-to-csv/dist/ng-table-to-csv');
+  require('../../bower_components/angularPrint/angularPrint');
   // polyfills
   require('../polyfills/es2015_ArrayPrototype_find');
 };

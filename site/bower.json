@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "ng-table-to-csv": "^0.3.3"
+    "ng-table-to-csv": "^0.3.3",
+    "angularPrint": "angular-print#^0.3.8"
   }
 }
