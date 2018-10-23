@@ -20,10 +20,39 @@ section#lists
             button.btn.btn-success(type='submit')
               | Subir  
               i.fa.fa-upload
-        span.badge.badge-pill(ng-if='lists.usersArr') Ya existe una lista para este evento.
+        span.label.label-warning(ng-if='lists.usersArr') Ya existe una lista para este evento.
   .row(ng-if='lists.usersArr')
     .col-md-6
-      h3 Búsqueda
+      h3 Buscar invitado
     .col-md-12
-      input.form-control(type='text', ng-model='lists.loadedUsers', uib-typeahead='user as (user.firstname + " " + user.lastname) for user in lists.usersArr | filter:$viewValue | limitTo:8', typeahead-on-select='lists.generateQR($item)')
-
+      input.form-control(
+                        type='text',
+                        ng-model='lists.loadedUsers',
+                        typeahead-min-length='3'
+                        uib-typeahead='user as (user.firstname + " " + user.lastname) for user in lists.usersArr | filter:$viewValue | limitTo:8',
+                        typeahead-on-select='lists.generateQR($item)',
+                        typeahead-no-results='lists.noResults')
+      .row(ng-if='lists.noResults')
+        .col-xs-12
+          span.label.label-danger
+            | No hay resultados.  
+            i.fa.fa-warning
+  .row(ng-if='lists.usersArr')
+    .col-md-12
+      h3 Inscribir nuevo
+    .col-md-12
+      form(ng-submit='lists.newInvite()')
+        .col-xs-8
+          .col-xs-6
+            form-group
+              label Nombre
+              input.form-control(type='text', ng-model='lists.newUser.fname')
+          .col-xs-6
+            form-group
+              label Apellido
+              input.form-control(type='text', ng-model='lists.newUser.lname')
+        .col-xs-4
+          form-group
+            button.new-user.btn.btn-success(type='submit')
+              | Ingresar  
+              i.fa.fa-plus-circle

@@ -7,7 +7,8 @@
     .col-xs-4
       img.qr.image-responsive(ng-src='{{modalQrCode.qr}}')
     .col-xs-8
-      h2.qrcode-title {{modalQrCode.user.firstname}} {{modalQrCode.user.lastname}}
+      h1.qrcode-title {{modalQrCode.user.firstname}}
+      h2.qrcode-subtitle{{modalQrCode.user.lastname}}
       //- h3 {{modalQrCode.eventName}}
 .modal-footer
   .row.text-center

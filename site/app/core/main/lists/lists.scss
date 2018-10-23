@@ -1,26 +1,17 @@
 @import '../../css/functions';
 @import '../../css/colors';
 
-#lists{
-  @media print {
-    .qr-print {
-        background-color: white;
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 15px;
-        font-size: 14px;
-        line-height: 18px;
-    }
-  }
-}
 .qrcode-title{
-  margin-top: 90px;
+  margin-top: 35pt;
   font-weight: bolder;
 }
+.qrcode-subtitle{
+  margin-top: 0px;
+  font-weight: bolder;
+}
+.new-user{
+  margin-top:25px;
+}
 img.qr{
-  margin-top: 20px;
+  margin: 0px;
 }

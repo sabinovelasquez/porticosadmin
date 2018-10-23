@@ -16,6 +16,18 @@ export default ngModule => {
       const encodedQR = `${nameCoded}_${item.code}_${item.firstname}${item.lastname}`;
       this.qr = `https://chart.googleapis.com/chart?cht=qr&chl=${encodedQR}&chs=180x180&chld=L|0`;
       modalQr.open(this.qr, item, this.eventName);
+      this.loadedUsers = null;
+    };
+    this.newInvite = () => {
+      this.newUserToFB = {
+        code: 7,
+        firstname: this.newUser.fname,
+        lastname: this.newUser.lname,
+      };
+      firebaseAPIService.storeInvite(this.eventkey, 7).then( (setNewEvent) => {
+        setNewEvent.list = this.newUserToFB;
+        return setNewEvent.$save();
+      });
     };
     this.getUsers = () => {
       this.usersArr = null;
