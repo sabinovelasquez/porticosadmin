@@ -3,14 +3,14 @@ section#lists
   h1 Listas
   .row
     .col-md-6
-      h2 PASO 1
+      h3 PASO 1
       form
         form-group
           label Seleccionar Evento
           select.form-control(multiple, ng-model='lists.selectedEvent')
-            option(ng-repeat='(key, event) in lists.events', ng-click='lists.eventkey=key') {{event.title}}
+            option(ng-repeat='(key, event) in lists.events', ng-click='lists.eventkey=key;lists.getUsers();') {{event.title}}
     .col-md-6(ng-if='lists.selectedEvent')
-      h2 PASO 2
+      h3 PASO 2
       form(ng-submit='lists.upload()')
         .form-group
           label Subir lista de invitados para evento "{{lists.selectedEvent[0]}}"
@@ -20,5 +20,12 @@ section#lists
             button.btn.btn-success(type='submit')
               | Subir  
               i.fa.fa-upload
+        span.badge.badge-pill(ng-if='lists.usersArr') Ya existe una lista para este evento.
+  .row(ng-if='lists.usersArr')
+    .col-md-6
+      h3 Búsqueda
     .col-md-12
-      p usuarios: {{lists.userlist}}
+      input.form-control(type='text', ng-model='lists.loadedUsers', uib-typeahead='user as (user.firstname + " " + user.lastname) for user in lists.usersArr | filter:$viewValue | limitTo:8', typeahead-on-select='lists.generateQR($item)')
+    .col-md-12
+      .qr-print
+        img.image-responsive(ng-src='{{lists.qr}}')

@@ -23,9 +23,9 @@ export default ngModule => {
                 const lastname = arr[2];
                 if (!code) {
                   code = count;
-                  count++;
                 }
-                users[code] = {firstname: firstname, lastname: lastname};
+                users[code] = {firstname: firstname, lastname: lastname, code: code};
+                count++;
               });
               scope.$apply( () => {
                 scope.fileReader = users;
