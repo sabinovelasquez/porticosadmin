@@ -26,6 +26,4 @@ section#lists
       h3 Búsqueda
     .col-md-12
       input.form-control(type='text', ng-model='lists.loadedUsers', uib-typeahead='user as (user.firstname + " " + user.lastname) for user in lists.usersArr | filter:$viewValue | limitTo:8', typeahead-on-select='lists.generateQR($item)')
-    .col-md-12
-      .qr-print
-        img.image-responsive(ng-src='{{lists.qr}}')
+

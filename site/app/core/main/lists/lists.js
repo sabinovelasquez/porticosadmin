@@ -1,5 +1,5 @@
 export default ngModule => {
-  ngModule.controller('ListsCtrl', function ListsCtrl(firebaseAPIService) {
+  ngModule.controller('ListsCtrl', function ListsCtrl(firebaseAPIService, modalQr) {
     this.eventkey = '';
     this.eventName = '';
     this.usersArr = null;
@@ -15,6 +15,7 @@ export default ngModule => {
       }
       const encodedQR = `${nameCoded}_${item.code}_${item.firstname}${item.lastname}`;
       this.qr = `https://chart.googleapis.com/chart?cht=qr&chl=${encodedQR}&chs=180x180&chld=L|0`;
+      modalQr.open(this.qr, item, this.eventName);
     };
     this.getUsers = () => {
       this.usersArr = null;
