@@ -19,13 +19,18 @@ export default ngModule => {
       this.loadedUsers = null;
     };
     this.newInvite = () => {
+      let lastNum = 0;
+      if (this.events[this.eventkey].list) {
+        lastNum = this.events[this.eventkey].list.length;
+      }
       this.newUserToFB = {
-        code: 7,
+        code: lastNum,
         firstname: this.newUser.fname,
         lastname: this.newUser.lname,
       };
-      firebaseAPIService.storeInvite(this.eventkey, 7).then( (setNewEvent) => {
-        setNewEvent.list = this.newUserToFB;
+      firebaseAPIService.storeInvite(this.eventkey).then( (setNewEvent) => {
+        setNewEvent[lastNum] = this.newUserToFB;
+        this.generateQR(setNewEvent[lastNum]);
         return setNewEvent.$save();
       });
     };

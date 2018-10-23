@@ -83,7 +83,7 @@ export default ngModule => {
         return setEvent.$loaded();
       },
       storeInvite: (eventKey) => {
-        const ref = firebaseClient.child(`events/${eventKey}`);
+        const ref = firebaseClient.child(`events/${eventKey}/list`);
         const newUser = $firebaseObject(ref);
         return newUser.$loaded();
       },
