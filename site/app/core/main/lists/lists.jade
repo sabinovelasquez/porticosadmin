@@ -1,0 +1,24 @@
+nav-bar
+section#lists
+  h1 Listas
+  .row
+    .col-md-6
+      h2 PASO 1
+      form
+        form-group
+          label Seleccionar Evento
+          select.form-control(multiple, ng-model='lists.selectedEvent')
+            option(ng-repeat='(key, event) in lists.events', ng-click='lists.eventkey=key') {{event.title}}
+    .col-md-6(ng-if='lists.selectedEvent')
+      h2 PASO 2
+      form(ng-submit='lists.upload()')
+        .form-group
+          label Subir lista de invitados para evento "{{lists.selectedEvent[0]}}"
+          input(type='file', file-reader='fileContent', ng-bind='lists.userlist=fileContent')
+          small *La lista debe estar con formato .csv
+          .input-group(ng-if='fileContent')
+            button.btn.btn-success(type='submit')
+              | Subir  
+              i.fa.fa-upload
+    .col-md-12
+      p usuarios: {{lists.userlist}}

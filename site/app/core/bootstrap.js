@@ -2,8 +2,8 @@ require('./vendor')();
 
 const ngModule = angular.module('app', [
   'duScroll',
-  'ngAnimate',
-  'ngParallax',
+  // 'ngAnimate',
+  // 'ngParallax',
   'ngTouch',
   'ui.bootstrap',
   'ui.router',

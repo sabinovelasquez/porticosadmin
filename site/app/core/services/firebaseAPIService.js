@@ -77,6 +77,11 @@ export default ngModule => {
           return setEvent.$save();
         });
       },
+      setEventList: (eventKey) => {
+        const ref = firebaseClient.child(`events/${eventKey}`);
+        const setEvent = $firebaseObject(ref);
+        return setEvent.$loaded();
+      },
     };
     return service;
   });

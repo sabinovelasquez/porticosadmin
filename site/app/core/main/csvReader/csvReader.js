@@ -9,6 +9,7 @@ export default ngModule => {
         element.on('change', (changeEvent) => {
           const files = changeEvent.target.files;
           if (files.length) {
+            let count = 0;
             const reader = new FileReader();
             reader.onload = (event) => {
               const users = {};
@@ -17,9 +18,13 @@ export default ngModule => {
               __.each(usersCsv, (user) => {
                 let arr = user.split(';');
                 arr = user.split(',');
-                const code = arr[0];
+                let code = arr[0];
                 const firstname = arr[1];
                 const lastname = arr[2];
+                if (!code) {
+                  code = count;
+                  count++;
+                }
                 users[code] = {firstname: firstname, lastname: lastname};
               });
               scope.$apply( () => {

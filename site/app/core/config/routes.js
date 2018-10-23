@@ -83,6 +83,17 @@ export default ngModule => {
             return Auth.$requireSignIn();
           },
         },
+      })
+      .state('lists', {
+        url: '/lists',
+        template: require('../main/lists/lists.jade'),
+        controller: 'ListsCtrl',
+        controllerAs: 'lists',
+        resolve: {
+          currentAuth: (Auth) => {
+            return Auth.$requireSignIn();
+          },
+        },
       });
     }
   );

@@ -5,8 +5,8 @@ module.exports = () => {
   require('../index.scss');
 
   require('angular');
-  require('angular-animate');
-  require('angular-sanitize');
+  // require('angular-animate');
+  // require('angular-sanitize');
   require('angular-scroll');
   require('angular-ui-router');
   require('angular-ui-bootstrap');
