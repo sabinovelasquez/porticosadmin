@@ -21,10 +21,11 @@ export default ngModule => {
                 let code = arr[0];
                 const firstname = arr[1];
                 const lastname = arr[2];
+                const cargo = arr[3];
                 if (!code) {
                   code = count;
                 }
-                users[code] = {firstname: firstname, lastname: lastname, code: code};
+                users[code] = {firstname: firstname, lastname: lastname, cargo: cargo, code: code};
                 count++;
               });
               scope.$apply( () => {

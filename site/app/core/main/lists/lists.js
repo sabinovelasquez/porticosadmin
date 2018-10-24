@@ -27,6 +27,7 @@ export default ngModule => {
         code: lastNum,
         firstname: this.newUser.fname,
         lastname: this.newUser.lname,
+        cargo: this.newUser.cargo,
       };
       firebaseAPIService.storeInvite(this.eventkey).then( (setNewEvent) => {
         setNewEvent[lastNum] = this.newUserToFB;

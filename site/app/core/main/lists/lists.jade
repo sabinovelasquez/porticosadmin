@@ -43,14 +43,18 @@ section#lists
     .col-md-12
       form(ng-submit='lists.newInvite()')
         .col-xs-8
-          .col-xs-6
+          .col-xs-4
             form-group
               label Nombre
               input.form-control(type='text', ng-model='lists.newUser.fname')
-          .col-xs-6
+          .col-xs-4
             form-group
               label Apellido
               input.form-control(type='text', ng-model='lists.newUser.lname')
+          .col-xs-4
+            form-group
+              label Institución
+              input.form-control(type='text', ng-model='lists.newUser.cargo')
         .col-xs-4
           form-group
             button.new-user.btn.btn-success(type='submit')
