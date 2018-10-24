@@ -19,9 +19,12 @@ export default ngModule => {
                 let arr = user.split(';');
                 arr = user.split(',');
                 let code = arr[0];
+                let cargo = 'invitado';
                 const firstname = arr[1];
                 const lastname = arr[2];
-                const cargo = arr[3];
+                if (arr[3]) {
+                  cargo = arr[3];
+                }
                 if (!code) {
                   code = count;
                 }
