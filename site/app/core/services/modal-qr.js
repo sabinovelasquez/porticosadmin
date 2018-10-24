@@ -4,7 +4,7 @@ export default ngModule => {
       $uibModal.open({
         animation: true,
         template: require('../main/modals/modalQr.jade'),
-        size: 'md',
+        size: 'lg',
         controllerAs: 'modalQrCode',
         controller: function modalQrCtrl($uibModalInstance) {
           this.qr = qr;
