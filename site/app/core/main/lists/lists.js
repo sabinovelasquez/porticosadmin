@@ -3,6 +3,11 @@ export default ngModule => {
     this.eventkey = '';
     this.eventName = '';
     this.usersArr = null;
+    this.uploaded = false;
+    this.alerts = [];
+    this.closeAlert = (index) => {
+      this.alerts.splice(index, 1);
+    };
     firebaseAPIService.getEvents().then( (data) => {
       this.events = data;
     });
@@ -20,18 +25,24 @@ export default ngModule => {
     };
     this.newInvite = () => {
       let lastNum = 0;
+      let optionalcargo = '';
       if (this.events[this.eventkey].list) {
         lastNum = this.events[this.eventkey].list.length;
+      }
+      if (this.newUser.cargo) {
+        optionalcargo = this.newUser.cargo;
       }
       this.newUserToFB = {
         code: lastNum,
         firstname: this.newUser.fname,
         lastname: this.newUser.lname,
-        cargo: this.newUser.cargo,
+        cargo: optionalcargo,
       };
       firebaseAPIService.storeInvite(this.eventkey).then( (setNewEvent) => {
         setNewEvent[lastNum] = this.newUserToFB;
         this.generateQR(setNewEvent[lastNum]);
+        this.getUsers();
+        this.alerts.push({ type: 'success', msg: 'Usuario almacenado con éxito', timer: 10000 });
         return setNewEvent.$save();
       });
     };
@@ -43,8 +54,13 @@ export default ngModule => {
       });
     };
     this.upload = () => {
+      this.uploadLoading = true;
       firebaseAPIService.setEventList(this.eventkey).then( (setEvent) => {
         setEvent.list = this.userlist;
+        this.uploaded = true;
+        this.uploadLoading = false;
+        this.getUsers();
+        this.alerts.push({ type: 'success', msg: 'Lista cargada con éxito', timer: 5000 });
         return setEvent.$save();
       });
     };

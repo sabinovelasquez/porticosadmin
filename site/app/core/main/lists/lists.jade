@@ -2,13 +2,14 @@ nav-bar
 section#lists
   h1 Listas
   .row
+    uib-alert.alert.alert-success(ng-repeat='alert in lists.alerts', dismiss-on-timeout='{{alert.timer}}', close='lists.closeAlert($index)') {{alert.msg}}
     .col-md-6
       h3 PASO 1
       form
         form-group
           label Seleccionar Evento
           select.form-control(multiple, ng-model='lists.selectedEvent')
-            option(ng-repeat='(key, event) in lists.events', ng-click='lists.eventkey=key;lists.getUsers();') {{event.title}}
+            option(ng-repeat='(key, event) in lists.events', ng-click='lists.eventkey=key;lists.getUsers();lists.uploaded=false') {{event.title}}
     .col-md-6(ng-if='lists.selectedEvent')
       h3 PASO 2
       form(ng-submit='lists.upload()')
@@ -16,10 +17,12 @@ section#lists
           label Subir lista de invitados para evento "{{lists.selectedEvent[0]}}"
           input(type='file', file-reader='fileContent', ng-bind='lists.userlist=fileContent')
           small *La lista debe estar con formato .csv
-          .input-group(ng-if='fileContent')
+          .input-group(ng-if='lists.userlist')
             button.btn.btn-success(type='submit')
               | Subir  
               i.fa.fa-upload
+          .loading(ng-if='lists.uploadLoading')
+            i.fa.fa-spinner.fa-pulse
         span.label.label-warning(ng-if='lists.usersArr') Ya existe una lista para este evento.
   .row(ng-if='lists.usersArr')
     .col-md-6
@@ -53,7 +56,9 @@ section#lists
               input.form-control(type='text', ng-model='lists.newUser.lname')
           .col-xs-4
             form-group
-              label Institución
+              label
+                | Institución  
+                small (Opcional)
               input.form-control(type='text', ng-model='lists.newUser.cargo')
         .col-xs-4
           form-group
