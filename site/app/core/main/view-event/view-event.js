@@ -48,10 +48,16 @@ export default ngModule => {
         this.bLockNums.push(numKey);
       });
       __.each(this.blocks, (block, key)  => {
+        // console.log(key);
         if (temp[key]) {
-          finalTemp.push(temp[key]);
           const str = temp[key].event.split(' ');
           const toRem = __.indexOf(this.bLockNums, (str[1] - 1));
+          finalTemp.push({
+            code: temp[key].code,
+            date: temp[key].date,
+            event: parseInt(str[1], 0),
+            hour: temp[key].hour,
+          });
           this.bLockNums.splice(toRem, 1);
         } else {
           comp = this.bLockNums[0];
@@ -60,7 +66,7 @@ export default ngModule => {
           finalTemp.push({
             code: id,
             date: '-',
-            event: `Bloque ${comp + 1}`,
+            event: `${comp + 1}`,
             hour: '-',
           });
         }

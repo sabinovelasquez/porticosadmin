@@ -65,7 +65,8 @@ section#view-event
               td {{fileContent[user[0].code].firstname}}
               td {{fileContent[user[0].code].lastname}}
               td(ng-repeat='info in viewEvent.blocks')
-                span(ng-show='user[$index].hour != "-"') {{user[$index].hour}} - {{user[$index].percent | limitTo: 5}}%
+                span(ng-show='user[$index].hour != "-"')
+                  | {{user[$index].hour}}
               td.text-right {{viewEvent.getPercentage(user) | limitTo: 4}}%
               td.text-right {{viewEvent.getPercentageTotal(user)}}%
               td.text-center
