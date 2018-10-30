@@ -11,6 +11,24 @@ export default ngModule => {
     firebaseAPIService.getEvents().then( (data) => {
       this.events = data;
     });
+    this.downloadList = () => {
+      const eventN = this.eventName;
+      const nameArr = eventN.split(' ');
+      let nameCoded = '';
+      for (let dim = 0; dim < nameArr.length; dim++) {
+        nameCoded += nameArr[dim][0].toUpperCase();
+      }
+      let csvContent = 'data:text/csv;charset=utf-8,';
+      this.usersArr.forEach(element => {
+        csvContent += `${nameCoded}_${element.code}_${element.firstname}${element.lastname}, ${element.firstname}, ${element.lastname}\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const hiddenElement = document.createElement('a');
+      hiddenElement.href = encodedUri;
+      hiddenElement.target = '_blank';
+      hiddenElement.download = `${this.eventName}.csv`;
+      hiddenElement.click();
+    };
     this.generateQR = (item) => {
       const eventN = this.eventName;
       const nameArr = eventN.split(' ');

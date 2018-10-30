@@ -21,9 +21,13 @@ section#lists
             button.btn.btn-success(type='submit')
               | Subir  
               i.fa.fa-upload
+          br
+          span.label.label-warning(ng-if='lists.usersArr') Ya existe una lista para este evento.
           .loading(ng-if='lists.uploadLoading')
             i.fa.fa-spinner.fa-pulse
-        span.label.label-warning(ng-if='lists.usersArr') Ya existe una lista para este evento.
+        a.btn.btn-default(ng-if='lists.usersArr', ng-click='lists.downloadList()')
+          | Bajar lista  
+          i.fa.fa-download
   .row(ng-if='lists.usersArr')
     .col-md-6
       h3 Buscar invitado
